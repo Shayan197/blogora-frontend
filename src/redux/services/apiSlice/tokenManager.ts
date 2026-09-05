@@ -1,6 +1,5 @@
 // tokenManager.ts
 import { BaseQueryApi } from '@reduxjs/toolkit/query';
-import { RootState } from '@/redux';
 import { expireSession, setAccRefTokens } from '@/redux/features/authSlice';
 import { authTokenStorage } from '@/utils/authStorage.util';
 import getFreshToken from '@/utils/token.util';
@@ -10,40 +9,25 @@ import getFreshToken from '@/utils/token.util';
 // If the refresh token is also expired then it will clear the tokens from secure store and you will get the 401 error in api. Now you can safely expire the user session. to reauthenticate him.
 // This is also capable of handling the race conditions, means if multiple requests are made at the same time and the token is expired, it will only refresh the token once and all the requests will wait for the new token to be set before proceeding with their original queries.
 let isRefreshing = false;
-let refreshPromise: Promise<string | null> | null = null;
+let refreshPromise: Promise<boolean> | null = null;
+
 export const tokenManager = {
-    async refreshToken(api: BaseQueryApi): Promise<string | null> {
+    async refreshToken(api: BaseQueryApi): Promise<boolean> {
         if (!isRefreshing) {
             isRefreshing = true;
-            // api.dispatch(startRefreshing());
             refreshPromise = (async () => {
                 try {
-                    const state = api.getState() as RootState;
-                    const currentRefreshToken =
-                        state.auth.refreshToken ?? authTokenStorage.getRefreshToken();
-
-                    if (!currentRefreshToken) {
-                        authTokenStorage.clearTokens();
-                        api.dispatch(expireSession());
-                        return null;
-                    }
-
-                    const response = await getFreshToken(currentRefreshToken);
+                    const response = await getFreshToken();
                     if (response.error) {
                         if (response.error !== 'FETCH_ERROR') {
                             authTokenStorage.clearTokens();
                             api.dispatch(expireSession());
                         }
-                        return null;
+                        return false;
                     }
 
-                    const accessToken = response.data?.accessToken;
-                    const refreshToken = response.data?.refreshToken;
-                    if (!accessToken || !refreshToken) {
-                        authTokenStorage.clearTokens();
-                        api.dispatch(expireSession());
-                        return null;
-                    }
+                    const accessToken = response.data?.accessToken ?? 'cookie-session';
+                    const refreshToken = response.data?.refreshToken ?? 'cookie-session';
 
                     authTokenStorage.setTokens({ accessToken, refreshToken });
                     api.dispatch(
@@ -52,11 +36,11 @@ export const tokenManager = {
                             refreshToken,
                         }),
                     );
-                    return accessToken;
+                    return true;
                 } catch {
                     authTokenStorage.clearTokens();
                     api.dispatch(expireSession());
-                    return null;
+                    return false;
                 } finally {
                     isRefreshing = false;
                     refreshPromise = null;

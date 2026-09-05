@@ -13,31 +13,24 @@ type TokenResponse = {
 // ========================================
 //           Functions
 // ========================================
-// This function is used in the token manager to get refresh the token.
-const getFreshToken = async (refreshToken: string): Promise<TokenResponse> => {
+// This function is used in the token manager to refresh the token via HttpOnly cookies.
+const getFreshToken = async (_refreshToken?: string): Promise<TokenResponse> => {
     try {
-        const response = await fetch(`${BASE_URL}/token-refresh`, {
+        const response = await fetch(`${BASE_URL}/auth/token-refresh`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${refreshToken}`,
             },
+            credentials: 'include',
             body: JSON.stringify({}),
         });
         if (!response.ok) {
             return { error: 'TOKEN_EXPIRED' };
         }
-        const payload = (await response.json()) as { data?: Partial<AuthTokens> };
-        const accessToken = payload.data?.accessToken;
-
-        if (!accessToken) {
-            return { error: 'INVALID_TOKEN_RESPONSE' };
-        }
-
         return {
             data: {
-                accessToken,
-                refreshToken: payload.data?.refreshToken ?? refreshToken,
+                accessToken: 'cookie-session',
+                refreshToken: 'cookie-session',
             },
         };
     } catch {

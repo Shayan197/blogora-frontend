@@ -418,3 +418,49 @@ A thorough analysis of the complete frontend codebase (`next-auth-ts-rtkquery`) 
 ### 9.4 Final Production-Readiness Status
 
 Both backend (`blog-management-system`) and frontend (`next-auth-ts-rtkquery`) are in a clean, robust, scalable, fully integrated, and production-ready state.
+
+---
+
+## 10. End-to-End API Integration, Auth Routing, Theme & Quality Audit
+
+### 10.1 API Integration & Route Base URL Root Cause Fix
+- **Identified Root Cause**: The frontend environment variable `NEXT_PUBLIC_API_BASE_URL` was configured as `http://localhost:3000/api/auth` (or `3035/api/auth`). As a result, RTK Query appended domain paths (`/blogs/trending`, `/categories`, `/tags`) to the base URL, producing invalid requests such as `GET /api/auth/blogs/trending` which matched the backend `authRoutes` router where no such endpoints existed, returning `404 Not Found`.
+- **Resolution**:
+  - Updated `blog-managment-system-frontend/.env` and `.env.example` to `NEXT_PUBLIC_API_BASE_URL=http://localhost:3000/api`.
+  - Updated fallback `BASE_URL` in `src/constants/config.ts` to `http://localhost:3000/api`.
+  - Fixed backend `.env` casing for `DATABASE_NAME = test_db` to match `initial.config.ts`.
+
+### 10.2 Public vs. Protected Endpoints Audit
+- **Public Endpoints**:
+  - Auth: `login` (`POST /api/auth/login`), `signup` (`POST /api/auth/signup`), `otpVerify` (`POST /api/auth/otp-verify`), `otpResend` (`POST /api/auth/otp-resend`), `forgetPassword` (`POST /api/auth/password/forget`), `forgetPasswordOtpVerify` (`POST /api/auth/password/otp-verify`), `forgetPasswordReset` (`POST /api/auth/password/reset`).
+  - Blogs: `listBlogs` (`GET /api/blogs`), `getTrendingBlogs` (`GET /api/blogs/trending`), `getBlogBySlug` (`GET /api/blogs/:slugOrUuid`), `getBlogLikers` (`GET /api/blogs/:blogUuid/likes`).
+  - Categories: `listCategories` (`GET /api/categories`), `getCategoryBySlug` (`GET /api/categories/:slug`).
+  - Tags: `listTags` (`GET /api/tags`), `getTagBySlug` (`GET /api/tags/:slug`).
+  - Comments: `getBlogComments` (`GET /api/comments/blog/:blogUuid`).
+  - Profiles: `getPublicProfile` (`GET /api/profiles/author/:userUuid`).
+- **Protected Endpoints**:
+  - `getMe`, `updateMe`, `updatePassword`, `logout`, `token-refresh`, `getMyBlogs`, `createBlog`, `updateBlog`, `deleteBlog`, `togglePublishStatus`, `toggleLike`, `createCategory`, `updateCategory`, `deleteCategory`, `createTag`, `updateTag`, `deleteTag`, `createComment`, `updateComment`, `deleteComment`, `getNotifications`, `markAsRead`, `markAllAsRead`, `deleteNotification`, `getMyProfile`, `updateMyProfile`, `listUsers`, `getUserByUuid`, `updateUserRole`, `updateUserStatus`.
+- **Frontend Endpoint Management**:
+  - Renamed typo `publishEndpoints.ts` -> `publicEndpoints.ts` and updated RTK Query `baseQueryWithReauth` to bypass authorization header insertion and 401 token refresh loops on public endpoints.
+
+### 10.3 Theme System, Contrast & Tailwind Canonical Class Cleanup
+- **Navbar `Get Started` Button Fix**: Corrected visual contrast defects in dark mode caused by conflicting text/background classes (`text-white bg-[var(--text-primary)] text-[var(--text-inverse)]` -> `bg-text-primary text-text-inverse hover:bg-accent-primary hover:text-white`).
+- **Hero & Badge Contrast**: Enhanced dark mode contrast for the `Curated Publishing & Deep Engineering Thoughts` section badge (`bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-800/60`).
+- **Tailwind Canonical Token Mapping**: Expanded `@theme inline` in `globals.css` to define `--color-text-inverse` and canonical tokens (`background`, `foreground`, `surface`, `surface-subtle`, `border-subtle`, `text-primary`, `text-secondary`, `text-muted`, `text-inverse`, `accent-primary`), converting non-canonical `[var(...)]` classes across `Navbar.tsx`, `page.tsx`, `Footer.tsx`, and shared UI elements.
+
+### 10.4 Favicon & Font Configuration
+- **Favicon 404 Resolution**: Created `src/app/icon.svg` and added icon metadata in `src/app/layout.tsx`.
+- **Font Optimization**: Updated `Geist` and `Geist_Mono` Google Font loaders with `display: 'swap'`.
+
+### 10.5 Final Verification Matrix
+
+| Verification Check | Project | Tool / Command | Result |
+| :--- | :--- | :--- | :--- |
+| **Backend Build** | Backend | `npm run build` | ✅ **Success (0 Errors)** |
+| **Backend ESLint** | Backend | `npm run lint` | ✅ **0 Errors, 0 Warnings** |
+| **Backend Code Style** | Backend | `npm run format:check` | ✅ **100% Compliant** |
+| **Frontend TypeScript** | Frontend | `npx tsc --noEmit` | ✅ **0 Errors** (Strict Mode) |
+| **Frontend Build** | Frontend | `npm run build` | ✅ **Success (19/19 routes static & dynamic compiled)** |
+| **Frontend ESLint** | Frontend | `npm run lint` | ✅ **0 Errors** |
+| **Frontend Formatting** | Frontend | `npx prettier --write src/` | ✅ **100% Compliant** |
+

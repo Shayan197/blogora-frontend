@@ -6,8 +6,7 @@ import { Provider } from 'react-redux';
 import { store } from '@/redux';
 import { completeAuthBootstrap, login } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
-import { authTokenStorage } from '@/utils/authStorage.util';
-import getFreshToken, { verifyAccessTokenExpiry } from '@/utils/token.util';
+import { authApi } from '@/redux/services/api/auth/auth';
 
 type ProvidersProps = {
     children: ReactNode;
@@ -20,36 +19,20 @@ const AuthBootstrap = ({ children }: { children: ReactNode }) => {
         let isMounted = true;
 
         const bootstrapAuth = async () => {
-            const accessToken = authTokenStorage.getAccessToken();
-            const refreshToken = authTokenStorage.getRefreshToken();
-
-            if (accessToken && refreshToken && verifyAccessTokenExpiry(accessToken) > 30) {
-                const tokens = { accessToken, refreshToken };
-                authTokenStorage.setTokens(tokens);
-                dispatch(login(tokens));
-                return;
+            try {
+                const meResult = await dispatch(authApi.endpoints.getMe.initiate()).unwrap();
+                if (isMounted && meResult?.data) {
+                    dispatch(
+                        login({ accessToken: 'cookie-session', refreshToken: 'cookie-session' }),
+                    );
+                }
+            } catch {
+                // If getMe fails after refresh attempt, user remains unauthenticated
+            } finally {
+                if (isMounted) {
+                    dispatch(completeAuthBootstrap());
+                }
             }
-
-            if (!refreshToken) {
-                authTokenStorage.clearTokens();
-                dispatch(completeAuthBootstrap());
-                return;
-            }
-
-            const response = await getFreshToken(refreshToken);
-            if (!isMounted) return;
-
-            if (response.data?.accessToken && response.data.refreshToken) {
-                authTokenStorage.setTokens(response.data);
-                dispatch(login(response.data));
-                return;
-            }
-
-            if (response.error !== 'FETCH_ERROR') {
-                authTokenStorage.clearTokens();
-            }
-
-            dispatch(completeAuthBootstrap());
         };
 
         void bootstrapAuth();

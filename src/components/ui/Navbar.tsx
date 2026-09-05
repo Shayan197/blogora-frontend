@@ -73,7 +73,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
         <header
             className={`sticky top-0 z-40 w-full transition-all duration-300 ${
                 isScrolled
-                    ? 'bg-[var(--bg-glass)] backdrop-blur-xl border-b border-[var(--border-subtle)] shadow-sm'
+                    ? 'bg-surface/85 backdrop-blur-xl border-b border-border-subtle shadow-sm'
                     : 'bg-transparent border-b border-transparent'
             }`}
         >
@@ -82,16 +82,16 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                     {/* Brand Logo */}
                     <div className="flex items-center gap-8">
                         <Link href="/" className="flex items-center gap-2.5 group">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200">
+                            <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200">
                                 <span className="font-serif font-black text-2xl tracking-tighter">
                                     C
                                 </span>
                             </div>
                             <div className="flex flex-col">
-                                <span className="font-serif text-2xl font-bold tracking-tight text-[var(--text-primary)] group-hover:text-blue-600 transition-colors">
+                                <span className="font-serif text-2xl font-bold tracking-tight text-text-primary group-hover:text-blue-600 transition-colors">
                                     Chronicle
                                 </span>
-                                <span className="text-[10px] uppercase font-semibold tracking-widest text-[var(--text-muted)] -mt-1">
+                                <span className="text-[10px] uppercase font-semibold tracking-widest text-text-muted -mt-1">
                                     Editorial
                                 </span>
                             </div>
@@ -105,10 +105,10 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                     <Link
                                         key={link.href}
                                         href={link.href}
-                                        className={`text-sm font-medium transition-colors hover:text-[var(--accent-primary)] ${
+                                        className={`text-sm font-medium transition-colors hover:text-accent-primary ${
                                             isActive
-                                                ? 'text-[var(--accent-primary)] font-semibold'
-                                                : 'text-[var(--text-secondary)]'
+                                                ? 'text-accent-primary font-semibold'
+                                                : 'text-text-secondary'
                                         }`}
                                     >
                                         {link.label}
@@ -124,12 +124,12 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                         <button
                             type="button"
                             onClick={onOpenSearch ?? (() => router.push('/explore'))}
-                            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--bg-surface-subtle)] hover:bg-[var(--border-subtle)] text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all text-xs font-medium border border-[var(--border-subtle)]"
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-subtle hover:bg-border-subtle text-text-muted hover:text-text-primary transition-all text-xs font-medium border border-border-subtle"
                             aria-label="Search stories"
                         >
                             <FiSearch className="w-3.5 h-3.5" />
                             <span className="hidden sm:inline">Search stories...</span>
-                            <kbd className="hidden sm:inline px-1.5 py-0.5 text-[10px] bg-[var(--bg-surface)] rounded border border-[var(--border-subtle)] text-[var(--text-muted)]">
+                            <kbd className="hidden sm:inline px-1.5 py-0.5 text-[10px] bg-surface rounded border border-border-subtle text-text-muted">
                                 ⌘K
                             </kbd>
                         </button>
@@ -143,7 +143,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                 {isAuthorOrAdmin && (
                                     <Link
                                         href="/publish"
-                                        className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-sm shadow-blue-500/25 hover:shadow-md hover:shadow-blue-500/35 hover:-translate-y-0.5"
+                                        className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-sm shadow-blue-500/25 hover:shadow-md hover:shadow-blue-500/35 hover:-translate-y-0.5"
                                     >
                                         <FiEdit3 className="w-4 h-4" />
                                         <span>Write</span>
@@ -153,12 +153,12 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                 {/* Notifications Bell */}
                                 <Link
                                     href="/notifications"
-                                    className="relative p-2.5 rounded-full bg-[var(--bg-surface-subtle)] hover:bg-[var(--border-subtle)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors border border-[var(--border-subtle)]"
+                                    className="relative p-2.5 rounded-full bg-surface-subtle hover:bg-border-subtle text-text-secondary hover:text-text-primary transition-colors border border-border-subtle"
                                     aria-label="Notifications"
                                 >
                                     <FiBell className="w-4 h-4" />
                                     {unreadCount > 0 && (
-                                        <span className="absolute -top-1 -right-1 flex h-4 min-w-[16px] px-1 items-center justify-center rounded-full bg-rose-500 text-[10px] font-bold text-white shadow-sm animate-pulse">
+                                        <span className="absolute -top-1 -right-1 flex h-4 min-w-4 px-1 items-center justify-center rounded-full bg-rose-500 text-[10px] font-bold text-white shadow-sm animate-pulse">
                                             {unreadCount > 9 ? '9+' : unreadCount}
                                         </span>
                                     )}
@@ -169,10 +169,10 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                     <button
                                         type="button"
                                         onClick={() => setIsMenuOpen((prev) => !prev)}
-                                        className="flex items-center gap-2 p-1 rounded-full border-2 border-[var(--border-subtle)] hover:border-blue-500 transition-all cursor-pointer"
+                                        className="flex items-center gap-2 p-1 rounded-full border-2 border-border-subtle hover:border-blue-500 transition-all cursor-pointer"
                                         aria-label="User Profile Menu"
                                     >
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm">
+                                        <div className="w-8 h-8 rounded-full bg-linear-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm">
                                             {user?.firstName?.[0]?.toUpperCase() ?? 'U'}
                                         </div>
                                     </button>
@@ -183,12 +183,12 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                                 className="fixed inset-0 z-40"
                                                 onClick={() => setIsMenuOpen(false)}
                                             />
-                                            <div className="absolute right-0 mt-3 w-64 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xl z-50 py-2 divide-y divide-[var(--border-subtle)] animate-in fade-in zoom-in-95 duration-150">
+                                            <div className="absolute right-0 mt-3 w-64 rounded-2xl bg-surface border border-border-subtle shadow-xl z-50 py-2 divide-y divide-border-subtle animate-in fade-in zoom-in-95 duration-150">
                                                 <div className="px-4 py-3">
-                                                    <p className="text-sm font-semibold text-[var(--text-primary)] truncate">
+                                                    <p className="text-sm font-semibold text-text-primary truncate">
                                                         {user?.firstName} {user?.lastName}
                                                     </p>
-                                                    <p className="text-xs text-[var(--text-muted)] truncate">
+                                                    <p className="text-xs text-text-muted truncate">
                                                         {user?.email}
                                                     </p>
                                                 </div>
@@ -197,7 +197,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                                     <Link
                                                         href="/homepage"
                                                         onClick={() => setIsMenuOpen(false)}
-                                                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-subtle)] transition-colors"
+                                                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"
                                                     >
                                                         <FiLayers className="w-4 h-4 text-blue-500" />
                                                         <span>My Feed</span>
@@ -205,7 +205,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                                     <Link
                                                         href="/dashboard/stories"
                                                         onClick={() => setIsMenuOpen(false)}
-                                                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-subtle)] transition-colors"
+                                                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"
                                                     >
                                                         <FiBookOpen className="w-4 h-4 text-indigo-500" />
                                                         <span>Stories Dashboard</span>
@@ -213,7 +213,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                                     <Link
                                                         href="/editprofile"
                                                         onClick={() => setIsMenuOpen(false)}
-                                                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-subtle)] transition-colors"
+                                                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"
                                                     >
                                                         <FiUser className="w-4 h-4 text-sky-500" />
                                                         <span>Settings & Profile</span>
@@ -221,7 +221,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                                     <Link
                                                         href="/admin"
                                                         onClick={() => setIsMenuOpen(false)}
-                                                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-subtle)] transition-colors"
+                                                        className="flex items-center gap-2.5 px-4 py-2 text-sm text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"
                                                     >
                                                         <FiShield className="w-4 h-4 text-emerald-500" />
                                                         <span>Admin Console</span>
@@ -247,13 +247,13 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                             <div className="flex items-center gap-2 sm:gap-3">
                                 <Link
                                     href="/login"
-                                    className="px-3.5 py-1.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                                    className="px-3.5 py-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
                                 >
                                     Sign In
                                 </Link>
                                 <Link
                                     href="/signup"
-                                    className="px-4 py-1.5 rounded-full text-sm font-medium text-white bg-[var(--text-primary)] hover:bg-[var(--accent-primary)] text-[var(--text-inverse)] transition-all duration-200 shadow-sm"
+                                    className="px-4 py-1.5 rounded-full text-sm font-medium bg-text-primary text-text-inverse hover:bg-accent-primary hover:text-white transition-all duration-200 shadow-sm"
                                 >
                                     Get Started
                                 </Link>
@@ -264,7 +264,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                         <button
                             type="button"
                             onClick={() => setIsMobileNavOpen((prev) => !prev)}
-                            className="md:hidden p-2 rounded-lg text-[var(--text-secondary)] hover:bg-[var(--bg-surface-subtle)]"
+                            className="md:hidden p-2 rounded-lg text-text-secondary hover:bg-surface-subtle"
                             aria-label="Toggle navigation"
                         >
                             {isMobileNavOpen ? (
@@ -279,14 +279,14 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
 
             {/* Mobile Navigation Drawer */}
             {isMobileNavOpen && (
-                <div className="md:hidden bg-[var(--bg-surface)] border-b border-[var(--border-subtle)] px-4 pt-2 pb-6 space-y-3">
+                <div className="md:hidden bg-surface border-b border-border-subtle px-4 pt-2 pb-6 space-y-3">
                     <nav className="flex flex-col space-y-2">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
                                 onClick={() => setIsMobileNavOpen(false)}
-                                className="px-3 py-2 rounded-lg text-base font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface-subtle)]"
+                                className="px-3 py-2 rounded-lg text-base font-medium text-text-secondary hover:text-text-primary hover:bg-surface-subtle"
                             >
                                 {link.label}
                             </Link>

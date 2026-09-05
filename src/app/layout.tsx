@@ -8,11 +8,13 @@ import Providers from '@/app/providers';
 const geistSans = Geist({
     variable: '--font-geist-sans',
     subsets: ['latin'],
+    display: 'swap',
 });
 
 const geistMono = Geist_Mono({
     variable: '--font-geist-mono',
     subsets: ['latin'],
+    display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -33,6 +35,9 @@ export const metadata: Metadata = {
         'System Design',
     ],
     authors: [{ name: 'Chronicle Editorial Team' }],
+    icons: {
+        icon: '/icon.svg',
+    },
 };
 
 const RootLayout = ({
