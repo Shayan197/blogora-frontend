@@ -31,7 +31,7 @@ export const EditProfilePage = (): React.JSX.Element => {
     const [updateUserReq, { isLoading: isUpdatingUser }] = useUpdateMeMutation();
     const [updateProfileReq, { isLoading: isUpdatingProfile }] = useUpdateMyProfileMutation();
 
-    const user = userData?.data;
+    const user = userData?.data?.user;
     const profile = myProfileData?.data?.user?.profile;
 
     const [firstName, setFirstName] = useState('');

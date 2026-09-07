@@ -13,6 +13,10 @@ let refreshPromise: Promise<boolean> | null = null;
 
 export const tokenManager = {
     async refreshToken(api: BaseQueryApi): Promise<boolean> {
+        if (!authTokenStorage.hasTokens()) {
+            return false;
+        }
+
         if (!isRefreshing) {
             isRefreshing = true;
             refreshPromise = (async () => {

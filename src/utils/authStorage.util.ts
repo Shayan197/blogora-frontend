@@ -82,6 +82,15 @@ export const authTokenStorage = {
         removeFromStorage(localStorage, LEGACY_ACCESS_TOKEN_KEY);
         removeFromStorage(localStorage, LEGACY_REFRESH_TOKEN_KEY);
     },
+
+    hasTokens() {
+        return Boolean(
+            readFromStorage(getSessionStorage(), ACCESS_TOKEN_KEY) ||
+            readFromStorage(getLocalStorage(), REFRESH_TOKEN_KEY) ||
+            readFromStorage(getLocalStorage(), LEGACY_REFRESH_TOKEN_KEY) ||
+            readFromStorage(getLocalStorage(), LEGACY_ACCESS_TOKEN_KEY),
+        );
+    },
 };
 
 export const authFlowStorage = {

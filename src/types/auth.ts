@@ -16,11 +16,14 @@ export type ApiResponse<T = unknown> = {
 
 export type UserProfile = {
     id: string | number;
+    uuid?: string;
     firstName: string;
     lastName: string;
     email: string;
     gender: Gender;
     isActive: boolean;
+    roleId?: number;
+    avatar?: string | null;
     createdAt: string;
     updatedAt: string;
 };

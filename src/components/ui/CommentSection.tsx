@@ -29,7 +29,7 @@ export const CommentSection = ({ blogUuid }: CommentSectionProps): React.JSX.Ele
     const router = useRouter();
     const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
     const { data: authData } = useGetMeQuery(undefined, { skip: !isAuthenticated });
-    const currentUser = authData?.data;
+    const currentUser = authData?.data?.user;
 
     const { data: commentsData, isLoading } = useGetBlogCommentsQuery(blogUuid);
     const [createCommentReq, { isLoading: isPosting }] = useCreateCommentMutation();
@@ -116,10 +116,13 @@ export const CommentSection = ({ blogUuid }: CommentSectionProps): React.JSX.Ele
     const renderCommentNode = (c: Comment, isReply = false) => {
         const authorName = c.user ? `${c.user.firstName} ${c.user.lastName}` : 'Community Member';
         const initial = authorName[0]?.toUpperCase() ?? 'U';
-        const isOwner =
+        const isOwner = Boolean(
             currentUser &&
             c.user &&
-            (c.user.uuid === currentUser.id || c.user.id === currentUser.id);
+            ((currentUser.uuid && c.user.uuid === currentUser.uuid) ||
+                String(c.user.id) === String(currentUser.id) ||
+                c.user.uuid === String(currentUser.id)),
+        );
         const formattedDate = new Date(c.createdAt).toLocaleDateString('en-US', {
             month: 'short',
             day: 'numeric',

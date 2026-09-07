@@ -77,11 +77,11 @@ const Signup = (): React.JSX.Element => {
                 {/* Brand Header */}
                 <div className="text-center space-y-2">
                     <Link href="/" className="inline-flex items-center gap-2.5 group">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-serif font-black text-2xl shadow-md">
-                            C
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white italic font-serif font-black text-2xl shadow-md">
+                            B
                         </div>
                         <span className="font-serif text-3xl font-bold tracking-tight text-[var(--text-primary)]">
-                            Chronicle
+                            Blogora
                         </span>
                     </Link>
                     <p className="text-xs text-[var(--text-muted)]">
@@ -159,7 +159,7 @@ const Signup = (): React.JSX.Element => {
                     <Button
                         isSubmitting={isSubmitting || isLoading}
                         loading="Creating account..."
-                        text="Register with Chronicle"
+                        text="Register with Blogora"
                     />
 
                     <RootError error={errors.root} />

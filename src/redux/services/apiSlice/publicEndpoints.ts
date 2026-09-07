@@ -4,6 +4,7 @@
 // These endpoints can be accessed publicly without blocking on auth token expiration.
 const PUBLIC_ENDPOINTS = [
     'login',
+    'logout',
     'signup',
     'otpVerify',
     'otpResend',

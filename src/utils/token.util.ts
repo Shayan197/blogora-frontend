@@ -14,7 +14,7 @@ type TokenResponse = {
 //           Functions
 // ========================================
 // This function is used in the token manager to refresh the token via HttpOnly cookies.
-const getFreshToken = async (_refreshToken?: string): Promise<TokenResponse> => {
+const getFreshToken = async (): Promise<TokenResponse> => {
     try {
         const response = await fetch(`${BASE_URL}/auth/token-refresh`, {
             method: 'POST',

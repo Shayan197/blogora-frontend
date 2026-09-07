@@ -19,7 +19,7 @@ import {
 import ThemeToggle from '@/app/ThemeToggler';
 import { logout } from '@/redux/features/authSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { authApi, useGetMeQuery } from '@/redux/services/api/auth/auth';
+import { authApi, useGetMeQuery, useLogoutMutation } from '@/redux/services/api/auth/auth';
 import { useGetNotificationsQuery } from '@/redux/services/api/notifications/notificationsApi';
 import { authFlowStorage, authTokenStorage } from '@/utils/authStorage.util';
 
@@ -35,6 +35,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
     const pathname = usePathname();
     const router = useRouter();
     const dispatch = useAppDispatch();
+    const [logoutRequest] = useLogoutMutation();
 
     const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
     const { data: userData } = useGetMeQuery(undefined, { skip: !isAuthenticated });
@@ -51,14 +52,20 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const handleLogout = () => {
-        dispatch(logout());
-        dispatch(authApi.util.resetApiState());
-        authTokenStorage.clearTokens();
-        authFlowStorage.clearOtpContext();
-        authFlowStorage.clearPasswordResetEmail();
-        setIsMenuOpen(false);
-        router.push('/login');
+    const handleLogout = async () => {
+        try {
+            await logoutRequest().unwrap();
+        } catch {
+            // Ignore API logout error if session was already invalid or network issue
+        } finally {
+            dispatch(logout());
+            dispatch(authApi.util.resetApiState());
+            authTokenStorage.clearTokens();
+            authFlowStorage.clearOtpContext();
+            authFlowStorage.clearPasswordResetEmail();
+            setIsMenuOpen(false);
+            router.push('/login');
+        }
     };
 
     const navLinks = [

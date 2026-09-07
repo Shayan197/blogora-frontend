@@ -48,11 +48,12 @@ const authSlice = createSlice({
             state.isSessionExpired = false;
         },
         expireSession(state) {
+            const isPreviouslyAuthenticated = state.isAuthenticated;
             state.accessToken = null;
             state.refreshToken = null;
             state.isAuthenticated = false;
             state.isAuthInitialized = true;
-            state.isSessionExpired = true;
+            state.isSessionExpired = isPreviouslyAuthenticated;
         },
         completeAuthBootstrap(state) {
             state.isAuthInitialized = true;

@@ -7,6 +7,7 @@ import { store } from '@/redux';
 import { completeAuthBootstrap, login } from '@/redux/features/authSlice';
 import { useAppDispatch } from '@/redux/hooks';
 import { authApi } from '@/redux/services/api/auth/auth';
+import { authTokenStorage } from '@/utils/authStorage.util';
 
 type ProvidersProps = {
     children: ReactNode;
@@ -19,6 +20,13 @@ const AuthBootstrap = ({ children }: { children: ReactNode }) => {
         let isMounted = true;
 
         const bootstrapAuth = async () => {
+            if (!authTokenStorage.hasTokens()) {
+                if (isMounted) {
+                    dispatch(completeAuthBootstrap());
+                }
+                return;
+            }
+
             try {
                 const meResult = await dispatch(authApi.endpoints.getMe.initiate()).unwrap();
                 if (isMounted && meResult?.data) {
@@ -28,6 +36,7 @@ const AuthBootstrap = ({ children }: { children: ReactNode }) => {
                 }
             } catch {
                 // If getMe fails after refresh attempt, user remains unauthenticated
+                authTokenStorage.clearTokens();
             } finally {
                 if (isMounted) {
                     dispatch(completeAuthBootstrap());
