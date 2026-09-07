@@ -35,10 +35,10 @@ export const Footer = (): React.JSX.Element => {
                     <div className="lg:col-span-2 space-y-4">
                         <Link href="/" className="flex items-center gap-2.5 group">
                             <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-                                <span className="font-serif font-black text-xl">C</span>
+                                <span className="font-serif italic font-bold text-2xl">B</span>
                             </div>
                             <span className="font-serif text-2xl font-bold tracking-tight text-text-primary">
-                                Chronicle
+                                Blogora
                             </span>
                         </Link>
                         <p className="text-sm text-text-secondary leading-relaxed max-w-sm">

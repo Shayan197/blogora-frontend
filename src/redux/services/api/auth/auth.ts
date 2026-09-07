@@ -13,7 +13,7 @@ import type {
 
 type MessageResponse = ResponseType<null>;
 type AuthResponse = ResponseType<AuthTokens>;
-type UserProfileResponse = ResponseType<UserProfile>;
+type UserProfileResponse = ResponseType<{ user: UserProfile }>;
 
 export const authApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({

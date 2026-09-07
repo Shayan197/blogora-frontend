@@ -26,7 +26,7 @@ export const Homepage = (): React.JSX.Element => {
     const { data: categoriesData } = useListCategoriesQuery();
     const { data: notifsData } = useGetNotificationsQuery({ limit: 3 });
 
-    const user = userData?.data;
+    const user = userData?.data?.user;
     const blogs = feedData?.data?.items ?? [];
     const categories = categoriesData?.data?.categories ?? [];
     const notifications = notifsData?.data?.items ?? [];

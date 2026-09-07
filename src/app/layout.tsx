@@ -19,8 +19,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: {
-        default: 'Chronicle — Modern Editorial & Technical Publishing Platform',
-        template: '%s | Chronicle Editorial',
+        default: 'Blogora — Modern Editorial & Technical Publishing Platform',
+        template: '%s | Blogora Editorial',
     },
     description:
         'A refined space for deep thinking, technical excellence, and storytelling. Connecting discerning writers with engaged readers across software, architecture, and design.',

@@ -40,7 +40,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
     const { data: userData } = useGetMeQuery(undefined, { skip: !isAuthenticated });
     const { data: notifsData } = useGetNotificationsQuery({ limit: 5 }, { skip: !isAuthenticated });
 
-    const user = userData?.data;
+    const user = userData?.data?.user;
     const unreadCount = notifsData?.data?.unreadCount ?? 0;
 
     useEffect(() => {
@@ -83,13 +83,13 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                     <div className="flex items-center gap-8">
                         <Link href="/" className="flex items-center gap-2.5 group">
                             <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200">
-                                <span className="font-serif font-black text-2xl tracking-tighter">
-                                    C
+                                <span className="font-serif font-bold italic text-2xl tracking-tighter">
+                                    B
                                 </span>
                             </div>
                             <div className="flex flex-col">
                                 <span className="font-serif text-2xl font-bold tracking-tight text-text-primary group-hover:text-blue-600 transition-colors">
-                                    Chronicle
+                                    Blogora
                                 </span>
                                 <span className="text-[10px] uppercase font-semibold tracking-widest text-text-muted -mt-1">
                                     Editorial

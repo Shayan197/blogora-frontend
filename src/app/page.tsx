@@ -266,7 +266,7 @@ export const HomePage = (): React.JSX.Element => {
                                     <FiFeather className="w-5 h-5" />
                                 </div>
                                 <h4 className="font-serif text-xl font-bold leading-snug">
-                                    Write on Chronicle
+                                    Write on Blogora
                                 </h4>
                                 <p className="text-xs text-blue-100 leading-relaxed">
                                     Share your expertise with a community of ambitious software
