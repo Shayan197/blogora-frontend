@@ -17,6 +17,7 @@ import ConfirmModal from '@/components/ui/ConfirmModal';
 import Footer from '@/components/ui/Footer';
 import Navbar from '@/components/ui/Navbar';
 import SkeletonLoader from '@/components/ui/SkeletonLoader';
+import { useGetMeQuery } from '@/redux/services/api/auth/auth';
 import {
     useListCategoriesQuery,
     useCreateCategoryMutation,
@@ -31,12 +32,15 @@ import {
 } from '@/redux/services/api/tags/tagsApi';
 import {
     useListUsersQuery,
+    useListRolesQuery,
     useUpdateUserRoleMutation,
     useUpdateUserStatusMutation,
 } from '@/redux/services/api/users/usersApi';
 import type { Category, Tag, UserListItem } from '@/types/blog';
 
 export const AdminConsolePage = (): React.JSX.Element => {
+    const { data: meData, isLoading: isMeLoading } = useGetMeQuery();
+    const currentUser = meData?.data?.user;
     const [activeTab, setActiveTab] = useState<'users' | 'categories' | 'tags'>('users');
     const [userSearch, setUserSearch] = useState('');
 
@@ -56,6 +60,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
     const [tagToDelete, setTagToDelete] = useState<string | null>(null);
 
     // RTK Queries & Mutations
+    const { data: rolesData } = useListRolesQuery();
     const { data: usersData, isLoading: isUsersLoading } = useListUsersQuery({
         search: userSearch || undefined,
         limit: 20,
@@ -75,9 +80,13 @@ export const AdminConsolePage = (): React.JSX.Element => {
     const [updateTagReq] = useUpdateTagMutation();
     const [deleteTagReq] = useDeleteTagMutation();
 
+    const roles = rolesData?.data?.roles ?? [];
     const users = usersData?.data?.items ?? [];
     const categories = categoriesData?.data?.categories ?? [];
     const tags = tagsData?.data?.items ?? [];
+
+    const userRoleSlug = currentUser?.role?.slug?.toLowerCase() || '';
+    const isAuthorizedAdmin = userRoleSlug === 'super-admin' || userRoleSlug === 'admin';
 
     const handleRoleChange = async (userUuid: string, roleId: number) => {
         try {
@@ -209,6 +218,47 @@ export const AdminConsolePage = (): React.JSX.Element => {
             setTagToDelete(null);
         }
     };
+
+    if (isMeLoading) {
+        return (
+            <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+                <Navbar />
+                <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+                    <SkeletonLoader count={3} />
+                </main>
+                <Footer />
+            </div>
+        );
+    }
+
+    if (!isAuthorizedAdmin) {
+        return (
+            <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
+                <Navbar />
+                <main className="flex-1 max-w-3xl mx-auto w-full px-4 py-16 flex flex-col items-center justify-center text-center space-y-6">
+                    <div className="w-16 h-16 rounded-full bg-rose-500/10 text-rose-500 flex items-center justify-center text-2xl font-bold">
+                        <FiShield />
+                    </div>
+                    <div className="space-y-2">
+                        <h1 className="font-serif text-3xl font-extrabold text-[var(--text-primary)]">
+                            Access Restricted
+                        </h1>
+                        <p className="text-sm text-[var(--text-secondary)] max-w-md">
+                            The Admin Governance Console is restricted to authorized platform
+                            administrators. Your account does not have sufficient privileges.
+                        </p>
+                    </div>
+                    <a
+                        href="/homepage"
+                        className="px-5 py-2.5 rounded-full text-xs font-semibold bg-[var(--accent-primary)] text-white hover:bg-[var(--accent-primary-hover)] transition-colors"
+                    >
+                        Return to Homepage
+                    </a>
+                </main>
+                <Footer />
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
@@ -342,7 +392,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                                                 </td>
                                                 <td className="px-6 py-4">
                                                     <select
-                                                        value={u.role?.id ?? 4}
+                                                        value={u.role?.id ?? ''}
                                                         onChange={(e) =>
                                                             handleRoleChange(
                                                                 u.uuid,
@@ -351,12 +401,17 @@ export const AdminConsolePage = (): React.JSX.Element => {
                                                         }
                                                         className="px-2.5 py-1 text-xs rounded-lg bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)] text-[var(--text-primary)] font-semibold"
                                                     >
-                                                        <option value={1}>Super Admin</option>
-                                                        <option value={2}>Admin</option>
-                                                        <option value={3}>Editor</option>
-                                                        <option value={4}>Author</option>
-                                                        <option value={5}>Moderator</option>
-                                                        <option value={6}>Subscriber</option>
+                                                        {roles.length > 0 ? (
+                                                            roles.map((r) => (
+                                                                <option key={r.id} value={r.id}>
+                                                                    {r.name}
+                                                                </option>
+                                                            ))
+                                                        ) : (
+                                                            <option value={u.role?.id ?? ''}>
+                                                                {u.role?.name ?? 'Assigned Role'}
+                                                            </option>
+                                                        )}
                                                     </select>
                                                 </td>
                                                 <td className="px-6 py-4">

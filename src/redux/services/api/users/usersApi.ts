@@ -1,6 +1,7 @@
 import { apiSlice, ResponseType } from '@/redux/services/apiSlice/apiSlice';
 import type {
     PaginatedResponse,
+    Role,
     UpdateUserRolePayload,
     UpdateUserStatusPayload,
     UserListItem,
@@ -8,6 +9,7 @@ import type {
 
 type UsersListResponse = ResponseType<PaginatedResponse<UserListItem>>;
 type SingleUserResponse = ResponseType<{ user: UserListItem }>;
+type RolesListResponse = ResponseType<{ roles: Role[] }>;
 type MessageResponse = ResponseType<null>;
 
 export const usersApi = apiSlice.injectEndpoints({
@@ -33,6 +35,10 @@ export const usersApi = apiSlice.injectEndpoints({
                 return `/users${query ? `?${query}` : ''}`;
             },
             providesTags: [{ type: 'UsersList', id: 'LIST' }],
+        }),
+
+        listRoles: builder.query<RolesListResponse, void>({
+            query: () => '/users/roles',
         }),
 
         getUserByUuid: builder.query<SingleUserResponse, string>({
@@ -68,6 +74,7 @@ export const usersApi = apiSlice.injectEndpoints({
 
 export const {
     useListUsersQuery,
+    useListRolesQuery,
     useGetUserByUuidQuery,
     useUpdateUserRoleMutation,
     useUpdateUserStatusMutation,

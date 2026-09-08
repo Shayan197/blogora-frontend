@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
@@ -216,10 +217,11 @@ export const StoryDetailPage = (): React.JSX.Element => {
                 {/* Hero Cover Image */}
                 {blog.coverImage && (
                     <div className="w-full aspect-video rounded-3xl overflow-hidden bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)] shadow-xl">
-                        <img
+                        <Image
                             src={blog.coverImage}
                             alt={blog.title}
                             className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
                         />
                     </div>
                 )}

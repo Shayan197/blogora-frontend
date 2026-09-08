@@ -1,3 +1,5 @@
+import type { Role } from '@/types/blog';
+
 export type Gender = 'male' | 'female' | 'other';
 
 export type OtpFlow = 'signup' | 'forget';
@@ -23,6 +25,7 @@ export type UserProfile = {
     gender: Gender;
     isActive: boolean;
     roleId?: number;
+    role?: Role;
     avatar?: string | null;
     createdAt: string;
     updatedAt: string;

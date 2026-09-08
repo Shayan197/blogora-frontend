@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FiHeart, FiMessageSquare, FiBookmark, FiClock } from 'react-icons/fi';
@@ -37,11 +38,12 @@ export const StoryCard = ({
                         href={`/story/${blog.slug}`}
                         className="block relative aspect-video w-full overflow-hidden bg-[var(--bg-surface-subtle)]"
                     >
-                        <img
+                        <Image
                             src={blog.coverImage}
                             alt={blog.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             loading="lazy"
+                            referrerPolicy="no-referrer"
                         />
                         {blog.category && (
                             <span className="absolute top-3 left-3 px-2.5 py-1 text-xs font-semibold rounded-full bg-[var(--bg-glass)] backdrop-blur-md text-[var(--text-primary)] border border-[var(--border-subtle)]">
@@ -225,11 +227,12 @@ export const StoryCard = ({
                         href={`/story/${blog.slug}`}
                         className="w-full sm:w-44 lg:w-52 aspect-video sm:aspect-square flex-shrink-0 rounded-2xl overflow-hidden bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)]"
                     >
-                        <img
+                        <Image
                             src={blog.coverImage}
                             alt={blog.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                             loading="lazy"
+                            referrerPolicy="no-referrer"
                         />
                     </Link>
                 )}
