@@ -39,9 +39,11 @@ export const StoryCard = ({
                         className="block relative aspect-video w-full overflow-hidden bg-[var(--bg-surface-subtle)]"
                     >
                         <Image
-                            src={blog.coverImage}
+                            src={blog.coverImage.trim()}
                             alt={blog.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             loading="lazy"
                             referrerPolicy="no-referrer"
                         />
@@ -225,12 +227,14 @@ export const StoryCard = ({
                 {blog.coverImage && (
                     <Link
                         href={`/story/${blog.slug}`}
-                        className="w-full sm:w-44 lg:w-52 aspect-video sm:aspect-square flex-shrink-0 rounded-2xl overflow-hidden bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)]"
+                        className="relative w-full sm:w-44 lg:w-52 aspect-video sm:aspect-square flex-shrink-0 rounded-2xl overflow-hidden bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)]"
                     >
                         <Image
-                            src={blog.coverImage}
+                            src={blog.coverImage.trim()}
                             alt={blog.title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            sizes="(max-width: 640px) 100vw, 208px"
                             loading="lazy"
                             referrerPolicy="no-referrer"
                         />

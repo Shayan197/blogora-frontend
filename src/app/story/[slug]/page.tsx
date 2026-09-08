@@ -216,11 +216,14 @@ export const StoryDetailPage = (): React.JSX.Element => {
 
                 {/* Hero Cover Image */}
                 {blog.coverImage && (
-                    <div className="w-full aspect-video rounded-3xl overflow-hidden bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)] shadow-xl">
+                    <div className="relative w-full aspect-video rounded-3xl overflow-hidden bg-[var(--bg-surface-subtle)] border border-[var(--border-subtle)] shadow-xl">
                         <Image
-                            src={blog.coverImage}
+                            src={blog.coverImage.trim()}
                             alt={blog.title}
-                            className="w-full h-full object-cover"
+                            fill
+                            priority
+                            className="object-cover"
+                            sizes="(max-width: 1200px) 100vw, 1200px"
                             referrerPolicy="no-referrer"
                         />
                     </div>
