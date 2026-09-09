@@ -1,171 +1,225 @@
-# Custom Auth Integration with RTK Query, Next.js, and TypeScript
+# ✨ Blogora Frontend
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black)
-![Redux](https://img.shields.io/badge/Redux-Toolkit-purple)
-![License](https://img.shields.io/badge/license-MIT-green)
+[![Next.js](https://img.shields.io/badge/Next.js-v16.3.1-black.svg?logo=next.js)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-v19.2.8-61DAFB.svg?logo=react)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-v5.9.3-3178C6.svg?logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.3.3-38B2AC.svg?logo=tailwind-css)](https://tailwindcss.com/)
+[![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-v2.12.0-764ABC.svg?logo=redux)](https://redux-toolkit.js.org/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-v13.1.1-black.svg?logo=framer)](https://www.framer.com/motion/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)]()
 
-This project is a production-style authentication frontend built with Next.js App Router, TypeScript, Redux Toolkit, RTK Query, React Hook Form, Zod, and Tailwind CSS.
+A sleek, responsive, and feature-rich frontend client for **Blogora** — a modern multi-author publishing and blogging community. Built with **Next.js 16 App Router (Turbopack), React 19, Tailwind CSS 4, and Redux Toolkit**, offering fluid user experiences, instant dark/light mode toggling, type-safe forms, and micro-interactions.
 
-It covers the complete authentication flow:
+---
 
-- Signup with OTP verification
-- Login with automatic OTP redirect for unverified users
-- Forgot password → OTP verification → Reset password
-- Protected homepage (route protection)
-- Edit profile
-- Update password
-- Automatic access-token refresh (RTK Query retry mechanism)
-- Clean auth state management (Redux + Storage sync)
-- Public & Protected route handling
-- Scalable OTP flow handling (signup & forget)
+## 📑 Table of Contents
+- [User Experience & Highlights](#-user-experience--highlights)
+- [Tech Stack & Ecosystem](#-tech-stack--ecosystem)
+- [Core Features](#-core-features)
+- [Application Architecture](#-application-architecture)
+- [Folder Structure](#-folder-structure)
+- [State Management & RTK Query](#-state-management--rtk-query)
+- [Form Validation & Type Safety](#-form-validation--type-safety)
+- [Theme Engine (Dark / Light Mode)](#-theme-engine-dark--light-mode)
+- [Getting Started & Local Setup](#-getting-started--local-setup)
+- [Environment Variables](#-environment-variables)
+- [Available Scripts](#-available-scripts)
 
-## Tech Stack
+---
 
-- Next.js 16 App Router
-- React 19
-- TypeScript
-- Redux Toolkit and RTK Query
-- React Redux
-- React Hook Form
-- Zod validation
-- Tailwind CSS 4
-- next-themes
-- react-hot-toast
+## 🎨 User Experience & Highlights
 
-## Backend Integration
+* **Next.js 16 Turbopack & React 19:** Ultra-fast page rendering, Server & Client component segregation, and sub-second Fast Refresh.
+* **Fluid Framer Motion Micro-Interactions:** Smooth page transitions, stagger effects on article grids, and interactive button feedback.
+* **Dark / Light Dynamic Theme:** Built using `next-themes` and Tailwind CSS 4, guaranteeing persistent theme memory without layout shifts or flashing.
+* **Granular Route Protection:** Custom Next.js Route Groups `(auth)` and `(protected)` enforcing secure navigation guards for authenticated creators and administrators.
+* **Responsive Across Devices:** Pixel-perfect adaptive layouts optimized for mobile smartphones, tablets, laptops, and ultra-wide displays.
 
-This frontend is designed to work with the following backend:
+---
 
-👉 [Node.js Auth Backend](https://github.com/Shayan197/nodejs-boilerplate)
+## 🛠 Tech Stack & Ecosystem
 
-Make sure the backend is running on http://localhost:3035 before starting the frontend.
+| Layer | Library / Framework |
+| :--- | :--- |
+| **Framework & Engine** | Next.js 16.3.1 (App Router, Turbopack) |
+| **UI Library** | React 19.2.8 & React-DOM 19 |
+| **Language** | TypeScript v5.9.3 |
+| **Styling** | Tailwind CSS v4.3.3 & PostCSS |
+| **Global State & API** | Redux Toolkit (RTK Query), Redux Persist |
+| **Animations** | Framer Motion v13.1.1 |
+| **Form Handling** | React Hook Form v7.85 + Zod v4.4.3 |
+| **Theming** | `next-themes` v0.4.6 |
+| **Notifications & Icons** | React Hot Toast, React Icons |
+| **Code Hygiene** | ESLint v9, Prettier, Husky, Commitlint |
 
-## Getting Started
+---
 
-Install dependencies:
+## ⚡ Core Features
 
+### 1. Reader & Exploration Suite
+* **Interactive Landing Page:** Curated hero section, trending articles showcase, and topic highlights.
+* **Story Reader (`/story/[slug]`):** Clean typography for long-form reading, reading time estimates, dynamic like counter, and author bio badges.
+* **Exploration & Discovery:** Dynamic filtering across categories (`/category/[slug]`), tags (`/tag/[slug]`), and author portfolios (`/author/[id]`).
+* **Nested Commenting & Discussion:** Real-time engagement threads allowing authenticated community members to comment and debate.
+
+### 2. Creator Studio & Publishing Workflow
+* **Article Publisher (`/publish`):** Rich article composer with cover image uploads, SEO slug generation, category selectors, and custom tag creation.
+* **Draft & Live Toggle:** Instant publication status toggles allowing creators to save drafts or publish directly to the global feed.
+* **Article Management (`/edit/[slug]`):** Real-time updating of story content, titles, and publication parameters.
+
+### 3. Authentication & Account Management
+* **Dual-Step Authentication:** Registration with automated 6-digit OTP verification.
+* **Credential Recovery:** Forgot password workflow with timed OTP verification and password reset.
+* **Author Profile Studio (`/editprofile`):** Update personal avatars, display name, bio, and social portfolio handles.
+* **Activity Center (`/notifications`):** Live notification center tracking claps, likes, comments, and system announcements.
+
+---
+
+## 📐 Application Architecture
+
+```
+                       +----------------------------------+
+                       |      Root Layout (App Router)    |
+                       |   - ThemeProvider (next-themes)  |
+                       |   - Redux Provider (RTK + Store) |
+                       |   - Toast Notification Container |
+                       +-----------------+----------------+
+                                         |
+            +----------------------------+----------------------------+
+            |                                                         |
+            v                                                         v
+   +--------------------+                                   +--------------------+
+   |   Public Routes    |                                   |  Protected Routes  |
+   |  - / (Home)        |                                   |  - /publish        |
+   |  - /story/[slug]   |                                   |  - /dashboard      |
+   |  - /category/...   |                                   |  - /editprofile    |
+   |  - /explore        |                                   |  - /notifications  |
+   +--------------------+                                   |  - /admin          |
+                                                            +---------+----------+
+                                                                      |
+                                                               (Token Guard)
+                                                                      |
+                                                                      v
+                                                            +--------------------+
+                                                            |  RTK Query Layer   |
+                                                            |  - BaseQuery       |
+                                                            |  - Token Refresh   |
+                                                            |  - Cache Tagging   |
+                                                            +--------------------+
+```
+
+---
+
+## 📁 Folder Structure
+
+```plaintext
+blogora-frontend/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── (auth)/             # Login, Signup, OTP Verify, Reset Password
+│   │   ├── (protected)/        # Dashboard, Publish, Edit, Notifications, Admin
+│   │   ├── story/[slug]/       # Full article reader page
+│   │   ├── category/[slug]/    # Category-filtered articles
+│   │   ├── tag/[slug]/         # Tag-filtered articles
+│   │   ├── author/[id]/        # Author profile view
+│   │   ├── layout.tsx          # Master layout with providers
+│   │   ├── providers.tsx       # Redux, PersistGate, NextThemes wrapper
+│   │   └── globals.css         # Global design tokens & Tailwind 4 imports
+│   ├── assets/                 # SVGs, webp banners, icons
+│   ├── components/             # Reusable UI component library
+│   │   ├── auth/               # Auth form cards & OTP inputs
+│   │   ├── common/             # Navbar, Footer, Cards, Loaders
+│   │   └── ui/                 # Buttons, Modals, Badges, Input fields
+│   ├── constants/              # App constants, routes, navigation config
+│   ├── hooks/                  # Custom React hooks
+│   ├── redux/                  # State management store & RTK services
+│   │   ├── features/           # Slices: authSlice, otpSlice, counterSlice
+│   │   ├── services/           # RTK Query APIs (Auth, Blogs, Comments, etc.)
+│   │   └── store.ts            # Configured Redux store with persistence
+│   ├── types/                  # TypeScript domain models & DTOs
+│   └── utils/                  # Cookie management, JWT parsers, formatters
+├── public/                     # Static media & favicons
+├── package.json
+└── tsconfig.json
+```
+
+---
+
+## 🔄 State Management & RTK Query
+
+* **RTK Query API Slice:** Centralized network layer handling automatic caching, optimistic updates, and cache invalidation via tags (`['Blog', 'Comment', 'Notification', 'User']`).
+* **Silent Token Refresher:** Built-in interceptor in `baseQuery.ts` detects expired `401 Unauthorized` responses, transparently dispatches a refresh request to `/api/auth/token-refresh`, and replays original requests seamlessly.
+* **Persistent Sessions:** Redux Persist securely synchronizes user authentication state into browser storage with automated hydration.
+
+---
+
+## 📋 Form Validation & Type Safety
+
+All forms across Blogora utilize **React Hook Form** paired with **Zod schema validation**:
+```typescript
+// Example: Strict typed validation
+import { z } from 'zod';
+
+export const loginSchema = z.object({
+  email: z.string().email('Please enter a valid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters long'),
+});
+```
+Benefits:
+* Zero unnecessary component re-renders.
+* Instant client-side validation feedback before hitting API endpoints.
+* Automatic TypeScript type inference from schemas.
+
+---
+
+## 🌓 Theme Engine (Dark / Light Mode)
+
+Blogora features an adaptive theme engine utilizing Tailwind CSS 4 CSS variables and `next-themes`:
+* **System Preference Detection:** Automatically adheres to the user's OS dark/light mode preference.
+* **Instant Manual Switcher:** Accessible theme toggler button in the navigation bar.
+* **Zero Layout Shift / Flash:** Hydrated via client providers to ensure seamless SSR compatibility.
+
+---
+
+## 💻 Getting Started & Local Setup
+
+### 1. Prerequisites
+* [Node.js](https://nodejs.org/) (version 20.x or higher)
+* Backend API running at `http://localhost:5000` (or configured API domain)
+
+### 2. Clone & Install
 ```bash
+cd blogora-frontend
 npm install
 ```
 
-Create a local environment file:
-
-```bash
-cp .env.example .env.local
-```
-
-Set your backend auth API URL:
-
+### 3. Environment Variables
+Create a `.env.local` file in the root of `blogora-frontend`:
 ```env
-NEXT_PUBLIC_API_BASE_URL=http://localhost:3035/api/auth
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
 
-Run the development server:
-
+### 4. Run Development Server
 ```bash
 npm run dev
 ```
-
-Open `http://localhost:3000`.
-
-## Scripts
-
-```bash
-npm run dev
-npm run lint
-npm run build
-npm run start
-```
-
-## Auth Flow
-
-The app uses RTK Query for API calls and a custom base query for token refresh.
-
-- Public endpoints do not receive the Bearer token.
-- Protected endpoints receive the current access token from Redux state.
-- If a protected request returns `401`, the refresh token is used to request a fresh access token.
-- If refresh succeeds, the failed request is retried once.
-- If refresh fails because the refresh token is expired or invalid, the session is expired and the user is redirected to login.
-
-## Token Storage Strategy
-
-Because the backend does not currently set HttpOnly cookies, the frontend has to manage tokens.
-
-Current implementation:
-
-- Access token: stored in Redux memory and mirrored in `sessionStorage`.
-- Refresh token: stored in `localStorage` because it must survive page reloads.
-- OTP and password-reset workflow state: stored in `sessionStorage` so it stays tab-scoped and is cleared after the flow finishes.
-- App startup: if the access token is still valid, Redux is restored from storage; otherwise the refresh token is used to get a new access token.
-- Logout/session expiry: all auth and temporary OTP/reset storage is cleared.
-
-This is safer than storing both access and refresh tokens permanently in `localStorage`, but it is still not as secure as HttpOnly cookies because JavaScript-accessible storage can be read if an XSS bug exists.
-
-Best backend-backed option:
-
-- Backend sets the refresh token in an HttpOnly, Secure, SameSite cookie.
-- Frontend keeps the access token only in memory.
-- Refresh endpoint reads the cookie and returns a short-lived access token.
-- Logout endpoint clears the refresh cookie server-side.
-
-Until the backend supports cookies, keep access tokens short-lived, rotate refresh tokens, enforce strong Content Security Policy, avoid unsafe HTML rendering, and never store tokens in Redux Persist.
-
-## Code Quality
-
-- ESLint for linting
-- Prettier for formatting
-- Husky for pre-commit hooks
-
-This ensures clean and consistent code before every commit.
-
-## Project Structure
-
-```text
-src/app/(auth)        Public auth pages
-src/app/(protected)   Protected pages
-src/components        Shared UI components
-src/redux             Store, slices, RTK Query API
-src/types             Shared TypeScript contracts
-src/utils             Auth storage, validation, token, and API helpers
-```
-
-## Environment Variables
-
-| Variable                   | Purpose                                                                      |
-| -------------------------- | ---------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_API_BASE_URL` | Base URL for the backend auth API. Example: `http://localhost:3035/api/auth` |
-
-`NEXT_PUBLIC_` is required because RTK Query calls run in client components.
-
-## Verification
-
-The project should pass:
-
-```bash
-npm run lint
-npx tsc --noEmit
-npm run build
-```
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application with Turbopack instant reloading.
 
 ---
 
-## Support
+## 🧪 Available Scripts
 
-If you found this project helpful:
-
-**If you like this project, feel free to star the repository!**
-
----
-
-## Author
-
-**Muhammad Shayan Bukhari**
-Frontend Developer — React | Next.js | TypeScript
+| Script | Command | Description |
+| :--- | :--- | :--- |
+| **Development** | `npm run dev` | Launches Next.js dev server with Turbopack |
+| **Production Build** | `npm run build` | Compiles and optimizes the web application |
+| **Production Start** | `npm start` | Boots the optimized production build |
+| **Linting** | `npm run lint` | Inspects code for syntax and style violations |
 
 ---
 
-## License
-
-MIT License
-
----
+## 👨‍💻 Author
+**Shayan Bukhari**  
+* Full-Stack Software Engineer  
+* GitHub: [@shayanbukhari](https://github.com/shayanbukhari)

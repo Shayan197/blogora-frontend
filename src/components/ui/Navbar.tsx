@@ -126,15 +126,15 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                     </div>
 
                     {/* Right Side Actions */}
-                    <div className="flex items-center gap-3 sm:gap-4">
-                        {/* Search Trigger */}
+                    <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+                        {/* Search Trigger — icon only on mobile, full pill on sm+ */}
                         <button
                             type="button"
                             onClick={onOpenSearch ?? (() => router.push('/explore'))}
-                            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-subtle hover:bg-border-subtle text-text-muted hover:text-text-primary transition-all text-xs font-medium border border-border-subtle"
+                            className="flex items-center gap-2 p-2 sm:px-3 sm:py-1.5 rounded-full bg-surface-subtle hover:bg-border-subtle text-text-muted hover:text-text-primary transition-all text-xs font-medium border border-border-subtle"
                             aria-label="Search stories"
                         >
-                            <FiSearch className="w-3.5 h-3.5" />
+                            <FiSearch className="w-4 h-4 sm:w-3.5 sm:h-3.5 flex-shrink-0" />
                             <span className="hidden sm:inline">Search stories...</span>
                             <kbd className="hidden sm:inline px-1.5 py-0.5 text-[10px] bg-surface rounded border border-border-subtle text-text-muted">
                                 ⌘K
@@ -146,7 +146,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
 
                         {isAuthenticated ? (
                             <>
-                                {/* Write Story Button */}
+                                {/* Write Story Button — hidden on mobile (in drawer) */}
                                 {isAuthorOrAdmin && (
                                     <Link
                                         href="/publish"
@@ -160,7 +160,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                 {/* Notifications Bell */}
                                 <Link
                                     href="/notifications"
-                                    className="relative p-2.5 rounded-full bg-surface-subtle hover:bg-border-subtle text-text-secondary hover:text-text-primary transition-colors border border-border-subtle"
+                                    className="relative p-2 sm:p-2.5 rounded-full bg-surface-subtle hover:bg-border-subtle text-text-secondary hover:text-text-primary transition-colors border border-border-subtle flex-shrink-0"
                                     aria-label="Notifications"
                                 >
                                     <FiBell className="w-4 h-4" />
@@ -172,7 +172,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                 </Link>
 
                                 {/* User Menu Dropdown */}
-                                <div className="relative">
+                                <div className="relative hidden md:block">
                                     <button
                                         type="button"
                                         onClick={() => setIsMenuOpen((prev) => !prev)}
@@ -251,16 +251,17 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                                 </div>
                             </>
                         ) : (
-                            <div className="flex items-center gap-2 sm:gap-3">
+                            /* Auth buttons — hidden on mobile (shown in drawer) */
+                            <div className="hidden sm:flex items-center gap-2 sm:gap-3">
                                 <Link
                                     href="/login"
-                                    className="px-3.5 py-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+                                    className="px-3.5 py-1.5 text-sm font-medium text-text-secondary hover:text-text-primary transition-colors whitespace-nowrap"
                                 >
                                     Sign In
                                 </Link>
                                 <Link
                                     href="/signup"
-                                    className="px-4 py-1.5 rounded-full text-sm font-medium bg-text-primary text-text-inverse hover:bg-accent-primary hover:text-white transition-all duration-200 shadow-sm"
+                                    className="px-4 py-1.5 rounded-full text-sm font-medium bg-text-primary text-text-inverse hover:bg-accent-primary hover:text-white transition-all duration-200 shadow-sm whitespace-nowrap"
                                 >
                                     Get Started
                                 </Link>
@@ -271,7 +272,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                         <button
                             type="button"
                             onClick={() => setIsMobileNavOpen((prev) => !prev)}
-                            className="md:hidden p-2 rounded-lg text-text-secondary hover:bg-surface-subtle"
+                            className="md:hidden p-2 rounded-lg text-text-secondary hover:bg-surface-subtle flex-shrink-0"
                             aria-label="Toggle navigation"
                         >
                             {isMobileNavOpen ? (
@@ -286,14 +287,15 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
 
             {/* Mobile Navigation Drawer */}
             {isMobileNavOpen && (
-                <div className="md:hidden bg-surface border-b border-border-subtle px-4 pt-2 pb-6 space-y-3">
-                    <nav className="flex flex-col space-y-2">
+                <div className="md:hidden bg-surface border-b border-border-subtle px-4 pt-3 pb-6 space-y-1">
+                    {/* Nav Links */}
+                    <nav className="flex flex-col space-y-0.5">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
                                 onClick={() => setIsMobileNavOpen(false)}
-                                className="px-3 py-2 rounded-lg text-base font-medium text-text-secondary hover:text-text-primary hover:bg-surface-subtle"
+                                className="px-3 py-2.5 rounded-lg text-sm font-medium text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"
                             >
                                 {link.label}
                             </Link>
@@ -302,13 +304,94 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                             <Link
                                 href="/publish"
                                 onClick={() => setIsMobileNavOpen(false)}
-                                className="flex items-center gap-2 px-3 py-2 rounded-lg text-base font-medium text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30"
+                                className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
                             >
                                 <FiEdit3 className="w-4 h-4" />
                                 <span>Write Story</span>
                             </Link>
                         )}
                     </nav>
+
+                    <div className="border-t border-border-subtle pt-3 mt-3">
+                        {isAuthenticated ? (
+                            <div className="space-y-0.5">
+                                {/* User info */}
+                                <div className="flex items-center gap-3 px-3 py-2 mb-1">
+                                    <div className="w-9 h-9 rounded-full bg-linear-to-tr from-blue-500 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm flex-shrink-0">
+                                        {user?.firstName?.[0]?.toUpperCase() ?? 'U'}
+                                    </div>
+                                    <div className="min-w-0">
+                                        <p className="text-sm font-semibold text-text-primary truncate">
+                                            {user?.firstName} {user?.lastName}
+                                        </p>
+                                        <p className="text-xs text-text-muted truncate">
+                                            {user?.email}
+                                        </p>
+                                    </div>
+                                </div>
+                                <Link
+                                    href="/homepage"
+                                    onClick={() => setIsMobileNavOpen(false)}
+                                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"
+                                >
+                                    <FiLayers className="w-4 h-4 text-blue-500 flex-shrink-0" />
+                                    <span>My Feed</span>
+                                </Link>
+                                <Link
+                                    href="/dashboard/stories"
+                                    onClick={() => setIsMobileNavOpen(false)}
+                                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"
+                                >
+                                    <FiBookOpen className="w-4 h-4 text-indigo-500 flex-shrink-0" />
+                                    <span>Stories Dashboard</span>
+                                </Link>
+                                <Link
+                                    href="/editprofile"
+                                    onClick={() => setIsMobileNavOpen(false)}
+                                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"
+                                >
+                                    <FiUser className="w-4 h-4 text-sky-500 flex-shrink-0" />
+                                    <span>Settings & Profile</span>
+                                </Link>
+                                <Link
+                                    href="/admin"
+                                    onClick={() => setIsMobileNavOpen(false)}
+                                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-text-secondary hover:text-text-primary hover:bg-surface-subtle transition-colors"
+                                >
+                                    <FiShield className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                                    <span>Admin Console</span>
+                                </Link>
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        setIsMobileNavOpen(false);
+                                        handleLogout();
+                                    }}
+                                    className="flex w-full items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm text-rose-500 hover:bg-rose-500/10 transition-colors"
+                                >
+                                    <FiLogOut className="w-4 h-4 flex-shrink-0" />
+                                    <span>Sign out</span>
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col gap-2 px-1">
+                                <Link
+                                    href="/login"
+                                    onClick={() => setIsMobileNavOpen(false)}
+                                    className="flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-medium text-text-primary border border-border-subtle hover:bg-surface-subtle transition-colors"
+                                >
+                                    Sign In
+                                </Link>
+                                <Link
+                                    href="/signup"
+                                    onClick={() => setIsMobileNavOpen(false)}
+                                    className="flex items-center justify-center px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-sm shadow-blue-500/25"
+                                >
+                                    Get Started
+                                </Link>
+                            </div>
+                        )}
+                    </div>
                 </div>
             )}
         </header>
