@@ -222,4 +222,4 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 ## 👨‍💻 Author
 **Shayan Bukhari**  
 * Full-Stack Software Engineer  
-* GitHub: [@shayanbukhari](https://github.com/shayanbukhari)
+* GitHub: [@shayanbukhari](https://github.com/Shayan197/)
