@@ -115,7 +115,7 @@ export const HomePage = (): React.JSX.Element => {
                                 <FiTrendingUp className="w-4 h-4" />
                             </div>
                             <h2 className="text-sm uppercase tracking-widest font-bold text-text-primary">
-                                Trending on Chronicle
+                                Trending on Blogora
                             </h2>
                         </div>
                         <Link
