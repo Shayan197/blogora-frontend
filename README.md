@@ -225,7 +225,21 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to view the 
 
 ---
 
+## 🐳 Docker Containerization
+
+Blogora Frontend includes an optimized multi-stage production Docker containerization pipeline:
+
+```bash
+# Build production Docker image
+docker build -t blogora-frontend .
+
+# Run container on port 3000
+docker run -p 3000:3000 -e NEXT_PUBLIC_API_BASE_URL="http://localhost:5000/api" blogora-frontend
+```
+
+---
+
 ## 👨‍💻 Author
 **Shayan Bukhari**  
 * Full-Stack Software Engineer  
-* GitHub: [@shayanbukhari](https://github.com/Shayan197/)
+* GitHub: [@Shayan197](https://github.com/Shayan197)

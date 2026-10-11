@@ -19,7 +19,7 @@ export const StoryCard = ({
 }: StoryCardProps): React.JSX.Element => {
     const authorName = blog.author
         ? `${blog.author.firstName} ${blog.author.lastName}`
-        : 'Chronicle Staff';
+        : 'Blogora Staff';
     const authorInitial = authorName[0]?.toUpperCase() ?? 'A';
     const formattedDate = blog.publishedAt
         ? new Date(blog.publishedAt).toLocaleDateString('en-US', {

@@ -154,7 +154,7 @@ export const ContactPage = (): React.JSX.Element => {
                                 <span>Frequently Asked Questions</span>
                             </h3>
                             <p className="text-xs text-[var(--text-muted)]">
-                                Quick answers to common questions about publishing on Chronicle.
+                                Quick answers to common questions about publishing on Blogora.
                             </p>
                         </div>
 

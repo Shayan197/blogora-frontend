@@ -22,8 +22,8 @@ export const AboutPage = (): React.JSX.Element => {
                         A home for ideas that shape software, systems, and craft.
                     </h1>
                     <p className="text-base sm:text-xl text-[var(--text-secondary)] leading-relaxed">
-                        Chronicle was built on a simple conviction: nuanced technical ideas deserve
-                        an uncompromised editorial reading experience free from aggressive popups,
+                        Blogora was built on a simple conviction: nuanced technical ideas deserve an
+                        uncompromised editorial reading experience free from aggressive popups,
                         tracking, and noise.
                     </p>
                 </div>
@@ -123,7 +123,7 @@ export const AboutPage = (): React.JSX.Element => {
                     </h2>
                     <p className="text-sm sm:text-base text-blue-100 max-w-xl mx-auto">
                         Join thousands of software professionals and writers who publish their best
-                        work on Chronicle.
+                        work on Blogora.
                     </p>
                     <div className="pt-2 flex justify-center gap-4">
                         <Link

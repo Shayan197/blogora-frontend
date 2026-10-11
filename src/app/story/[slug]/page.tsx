@@ -82,7 +82,7 @@ export const StoryDetailPage = (): React.JSX.Element => {
 
     const authorName = blog.author
         ? `${blog.author.firstName} ${blog.author.lastName}`
-        : 'Chronicle Staff';
+        : 'Blogora Staff';
     const authorInitial = authorName[0]?.toUpperCase() ?? 'A';
     const authorHeadline =
         blog.author?.profile?.headline || blog.author?.bio || 'Author & Contributor';
@@ -290,7 +290,7 @@ export const StoryDetailPage = (): React.JSX.Element => {
                                     <p className="text-xs text-[var(--text-secondary)] max-w-md">
                                         {blog.author.profile?.bio ||
                                             blog.author.bio ||
-                                            'Sharing systems engineering, product strategy, and architectural reflections on Chronicle.'}
+                                            'Sharing systems engineering, product strategy, and architectural reflections on Blogora.'}
                                     </p>
                                 </div>
                             </div>

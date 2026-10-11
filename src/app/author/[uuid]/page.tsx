@@ -112,7 +112,7 @@ export const AuthorProfilePage = (): React.JSX.Element => {
                                 <p className="text-sm sm:text-base text-[var(--text-secondary)] font-medium">
                                     {profile?.headline ||
                                         user.bio ||
-                                        'Author & Contributor on Chronicle'}
+                                        'Author & Contributor on Blogora'}
                                 </p>
                                 {profile?.location && (
                                     <p className="flex items-center gap-1 text-xs text-[var(--text-muted)]">

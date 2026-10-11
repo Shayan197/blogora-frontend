@@ -107,7 +107,7 @@ export const HomePage = (): React.JSX.Element => {
                     </div>
                 </section>
 
-                {/* Trending on Chronicle Section */}
+                {/* Trending on Blogora Section */}
                 <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between mb-8 pb-3 border-b border-border-subtle">
                         <div className="flex items-center gap-2.5">
@@ -297,7 +297,7 @@ export const HomePage = (): React.JSX.Element => {
                             </div>
 
                             <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
-                                In an internet crowded with transient noise, Chronicle is built as a
+                                In an internet crowded with transient noise, Blogora is built as a
                                 sanctuary for rigorous technical documentation, long-form systems
                                 insights, and nuanced narratives.
                             </p>

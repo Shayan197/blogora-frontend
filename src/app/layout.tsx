@@ -34,7 +34,7 @@ export const metadata: Metadata = {
         'Software Engineering',
         'System Design',
     ],
-    authors: [{ name: 'Chronicle Editorial Team' }],
+    authors: [{ name: 'Blogora Editorial Team' }],
     icons: {
         icon: '/icon.svg',
     },

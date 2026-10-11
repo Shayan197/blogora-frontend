@@ -14,7 +14,7 @@ export const Footer = (): React.JSX.Element => {
             toast.error('Please enter a valid email address');
             return;
         }
-        toast.success('Thank you for subscribing to Chronicle Editorial!');
+        toast.success('Thank you for subscribing to Blogora Editorial!');
         setNewsletterEmail('');
     };
 
@@ -48,7 +48,7 @@ export const Footer = (): React.JSX.Element => {
                         </p>
                         <div className="flex items-center gap-3 pt-2">
                             <a
-                                href="https://github.com"
+                                href="https://github.com/Shayan197"
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-label="GitHub"
@@ -173,7 +173,7 @@ export const Footer = (): React.JSX.Element => {
                 {/* Bottom Bar */}
                 <div className="mt-12 pt-8 border-t border-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
                     <p>
-                        © {new Date().getFullYear()} Chronicle Publishing Platform. Built with
+                        © {new Date().getFullYear()} Blogora Publishing Platform. Built with
                         Next.js, TypeScript & PostgreSQL.
                     </p>
                     <div className="flex items-center gap-6">

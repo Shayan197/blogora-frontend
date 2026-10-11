@@ -30,6 +30,15 @@ npx prettier --write "src/**/*.{ts,tsx,js,jsx}"
 npx tsc --noEmit
 ```
 
+### Docker Containerization
+```bash
+# Build production Next.js Docker image
+docker build -t blogora-frontend .
+
+# Run container
+docker run -p 3000:3000 -e NEXT_PUBLIC_API_BASE_URL="http://localhost:5000/api" blogora-frontend
+```
+
 ---
 
 ## 🧭 Super Admin Governance Console Architecture
@@ -65,8 +74,6 @@ npx tsc --noEmit
 
 ---
 
-## 👑 Super Admin Credentials
-
-- **Email**: `shayanbukhari12345@gmail.com`
-- **Password**: `Asdf123@`
-- **Role**: `super-admin`
+## 👑 Super Admin Governance Access
+- **Role Requirement**: Accounts with `role.slug === 'super-admin'` or `'admin'`.
+- **Security Policy**: Credentials are authenticated against the production backend API and never exposed in repository documentation.

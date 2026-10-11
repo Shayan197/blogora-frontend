@@ -85,11 +85,11 @@ const Reset = (): React.JSX.Element => {
             <div className="w-full max-w-md space-y-6">
                 <div className="text-center space-y-2">
                     <Link href="/" className="inline-flex items-center gap-2.5 group">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white font-serif font-black text-2xl shadow-md">
-                            C
+                        <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white italic font-serif font-black text-2xl shadow-md">
+                            B
                         </div>
                         <span className="font-serif text-3xl font-bold tracking-tight text-[var(--text-primary)]">
-                            Chronicle
+                            Blogora
                         </span>
                     </Link>
                 </div>
