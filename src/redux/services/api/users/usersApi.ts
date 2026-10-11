@@ -68,6 +68,43 @@ export const usersApi = apiSlice.injectEndpoints({
             }),
             invalidatesTags: [{ type: 'UsersList', id: 'LIST' }],
         }),
+
+        getAdminAnalytics: builder.query<
+            ResponseType<{
+                metrics: {
+                    totalUsers: number;
+                    activeUsers: number;
+                    blockedUsers: number;
+                    suspendedUsers: number;
+                    pendingUsers: number;
+                    verifiedUsers: number;
+                    unverifiedUsers: number;
+                };
+                demographics: {
+                    male: number;
+                    female: number;
+                    other: number;
+                };
+                roles: Array<{
+                    name: string;
+                    slug: string;
+                    color: string | null;
+                    count: number;
+                }>;
+            }>,
+            void
+        >({
+            query: () => '/users/analytics/overview',
+            providesTags: [{ type: 'UsersList', id: 'LIST' }],
+        }),
+
+        verifyUserManually: builder.mutation<MessageResponse, string>({
+            query: (uuid) => ({
+                url: `/users/${uuid}/verify`,
+                method: 'PATCH',
+            }),
+            invalidatesTags: [{ type: 'UsersList', id: 'LIST' }],
+        }),
     }),
     overrideExisting: true,
 });
@@ -78,4 +115,6 @@ export const {
     useGetUserByUuidQuery,
     useUpdateUserRoleMutation,
     useUpdateUserStatusMutation,
+    useGetAdminAnalyticsQuery,
+    useVerifyUserManuallyMutation,
 } = usersApi;

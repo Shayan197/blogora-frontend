@@ -7,7 +7,7 @@ module.exports = {
     bracketSpacing: true, // ✅ Keeps spacing inside object literals: { a: 1 }
     printWidth: 100, // ✅ Recommended for readability without breaking layout
     arrowParens: 'always', // ✅ Ensures clarity and consistency in arrow functions
-    endOfLine: 'lf', // ✅ Avoids cross-platform issues (esp. on Windows/macOS/Linux)
+    endOfLine: 'auto', // ✅ Avoids cross-platform CRLF/LF issues (esp. on Windows/macOS/Linux)
     jsxSingleQuote: false, // ✅ Use double quotes in JSX (default JSX convention)
     quoteProps: 'as-needed', // ✅ Keeps object property quotes clean unless required
 };

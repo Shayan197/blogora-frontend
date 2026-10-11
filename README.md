@@ -70,8 +70,14 @@ A sleek, responsive, and feature-rich frontend client for **Blogora** — a mode
 ### 3. Authentication & Account Management
 * **Dual-Step Authentication:** Registration with automated 6-digit OTP verification.
 * **Credential Recovery:** Forgot password workflow with timed OTP verification and password reset.
+* **Security & Input Shielding:** Theme-aware lock styling and password clipboard protection with masked placeholders.
 * **Author Profile Studio (`/editprofile`):** Update personal avatars, display name, bio, and social portfolio handles.
 * **Activity Center (`/notifications`):** Live notification center tracking claps, likes, comments, and system announcements.
+
+### 4. Super Admin Governance Console (`/admin`)
+* **Chrome-Style Collapsible Sidebar:** Hover rail (72px to 260px) with persistent session lock pin.
+* **4 Core Control Modules:** Executive Dashboard (12 visual scalable SVG charts), Verification Hub (pending OTP queue with 1-click manual verification), Users Directory (search, multi-filters, dossier drawer, role mutation), and Universal Platform Settings.
+* **Strict Geometric UI Placement:** Global Action Button fixed at bottom-right corner; table actions at table top-right; filter bars at section top-right.
 
 ---
 

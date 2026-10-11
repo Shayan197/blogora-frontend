@@ -204,8 +204,10 @@ export type UserListItem = {
     firstName: string;
     lastName: string;
     email: string;
+    phone?: string | null;
     gender: string;
     status: 'pending' | 'active' | 'blocked' | 'suspended';
+    isVerified?: boolean;
     isActive: boolean;
     loginCount: number;
     lastLogin?: string | null;
