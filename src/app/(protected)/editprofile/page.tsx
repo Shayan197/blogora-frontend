@@ -101,7 +101,7 @@ export const EditProfilePage = (): React.JSX.Element => {
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
             <Navbar />
 
-            <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+            <main className="flex-1 max-w-4xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-6 sm:py-12 space-y-6 sm:space-y-8">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[var(--border-subtle)]">
                     <div className="space-y-1">
@@ -128,7 +128,7 @@ export const EditProfilePage = (): React.JSX.Element => {
 
                 <form onSubmit={handleSave} className="space-y-8">
                     {/* Basic Account Info */}
-                    <div className="p-6 sm:p-8 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-6">
+                    <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-6">
                         <h2 className="text-xs uppercase tracking-widest font-bold text-[var(--text-muted)]">
                             Account Information
                         </h2>
@@ -176,7 +176,7 @@ export const EditProfilePage = (): React.JSX.Element => {
                     </div>
 
                     {/* Author & Bio Customization */}
-                    <div className="p-6 sm:p-8 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-6">
+                    <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-6">
                         <h2 className="text-xs uppercase tracking-widest font-bold text-[var(--text-muted)]">
                             Author Public Profile
                         </h2>
@@ -241,7 +241,7 @@ export const EditProfilePage = (): React.JSX.Element => {
                     </div>
 
                     {/* Social Channels */}
-                    <div className="p-6 sm:p-8 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-6">
+                    <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-6">
                         <h2 className="text-xs uppercase tracking-widest font-bold text-[var(--text-muted)]">
                             Social Profiles & Website
                         </h2>

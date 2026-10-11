@@ -42,9 +42,9 @@ export const Homepage = (): React.JSX.Element => {
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
             <Navbar />
 
-            <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-10">
+            <main className="flex-1 max-w-7xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-6 sm:py-12 space-y-6 sm:space-y-10">
                 {/* Welcome & Quick Action Banner */}
-                <section className="p-6 sm:p-10 rounded-3xl bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-950 text-white border border-slate-800 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <section className="p-5 sm:p-10 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-blue-900 via-indigo-950 to-slate-950 text-white border border-slate-800 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                     <div className="space-y-2">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 backdrop-blur-md text-blue-200 border border-white/10">
                             <FiZap className="w-3.5 h-3.5 text-blue-400" />
@@ -78,7 +78,7 @@ export const Homepage = (): React.JSX.Element => {
                 </section>
 
                 {/* Main Content Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14">
                     {/* Feed Column */}
                     <div className="lg:col-span-8 space-y-6">
                         {/* Feed Controls Bar */}

@@ -81,24 +81,24 @@ export const AuthorProfilePage = (): React.JSX.Element => {
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
             <Navbar />
 
-            <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-12">
+            <main className="flex-1 max-w-5xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-6 sm:py-14 space-y-6 sm:space-y-12">
                 {/* Author Card Banner */}
-                <div className="relative rounded-3xl overflow-hidden bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xl p-8 sm:p-12 space-y-6">
+                <div className="relative rounded-3xl overflow-hidden bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xl p-5 sm:p-12 space-y-6">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-                        <div className="flex items-center gap-5">
+                        <div className="flex items-center gap-4 sm:gap-5 w-full sm:w-auto">
                             {profile?.avatar || user.avatar ? (
                                 <img
                                     src={profile?.avatar || user.avatar || ''}
                                     alt={authorName}
-                                    className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl object-cover border-2 border-[var(--border-subtle)] shadow-md"
+                                    className="w-16 h-16 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl object-cover border-2 border-[var(--border-subtle)] shadow-md shrink-0"
                                 />
                             ) : (
-                                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-serif font-black text-3xl shadow-md">
+                                <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-2xl sm:rounded-3xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-serif font-black text-2xl sm:text-3xl shadow-md shrink-0">
                                     {authorInitial}
                                 </div>
                             )}
 
-                            <div className="space-y-1.5">
+                            <div className="space-y-1.5 min-w-0 flex-1">
                                 <div className="flex items-center gap-3">
                                     <h1 className="font-serif text-2xl sm:text-4xl font-extrabold text-[var(--text-primary)]">
                                         {authorName}

@@ -78,7 +78,7 @@ const ExploreContent = (): React.JSX.Element => {
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
             <Navbar />
 
-            <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
+            <main className="flex-1 max-w-7xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-6 sm:py-14 space-y-6 sm:space-y-10">
                 {/* Header & Search Banner */}
                 <div className="text-center max-w-2xl mx-auto space-y-4">
                     <h1 className="font-serif text-3xl sm:text-5xl font-extrabold text-[var(--text-primary)] tracking-tight">
@@ -95,12 +95,12 @@ const ExploreContent = (): React.JSX.Element => {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder="Search by keywords, titles, or concepts..."
-                            className="w-full pl-12 pr-28 py-3.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] focus:border-[var(--accent-primary)] focus:ring-2 focus:ring-[var(--accent-primary)]/20 shadow-md text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-all outline-none"
+                            className="w-full pl-10 sm:pl-12 pr-24 sm:pr-28 py-3 sm:py-3.5 rounded-full bg-[var(--bg-surface)] border border-[var(--border-subtle)] focus:border-[var(--accent-primary)] focus:ring-2 focus:ring-[var(--accent-primary)]/20 shadow-md text-xs sm:text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] transition-all outline-none"
                         />
-                        <FiSearch className="absolute left-4 top-5.5 w-5 h-5 text-[var(--text-muted)]" />
+                        <FiSearch className="absolute left-3.5 sm:left-4 top-5 sm:top-5.5 w-4 h-4 sm:w-5 sm:h-5 text-[var(--text-muted)]" />
                         <button
                             type="submit"
-                            className="absolute right-2 top-2 px-5 py-2 rounded-full text-xs font-semibold text-white bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] transition-colors shadow-sm"
+                            className="absolute right-1.5 sm:right-2 top-1.5 sm:top-2 px-4 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs font-semibold text-white bg-[var(--accent-primary)] hover:bg-[var(--accent-primary-hover)] transition-colors shadow-sm cursor-pointer"
                         >
                             Search
                         </button>

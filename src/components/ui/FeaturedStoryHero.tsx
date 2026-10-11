@@ -23,7 +23,7 @@ export const FeaturedStoryHero = ({ blog }: FeaturedStoryHeroProps): React.JSX.E
         : 'Featured Story';
 
     return (
-        <section className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 text-white border border-slate-800 shadow-2xl p-6 sm:p-10 lg:p-14 group">
+        <section className="relative w-full rounded-3xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 text-white border border-slate-800 shadow-2xl p-5 sm:p-10 lg:p-14 group">
             {/* Background Glow */}
             <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-blue-500/20 blur-3xl pointer-events-none" />
             <div className="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
@@ -48,7 +48,7 @@ export const FeaturedStoryHero = ({ blog }: FeaturedStoryHeroProps): React.JSX.E
                         href={`/story/${blog.slug}`}
                         className="block group-hover:text-blue-300 transition-colors"
                     >
-                        <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15]">
+                        <h1 className="font-serif text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.18] sm:leading-[1.15]">
                             {blog.title}
                         </h1>
                     </Link>

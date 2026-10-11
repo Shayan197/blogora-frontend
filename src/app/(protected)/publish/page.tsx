@@ -95,9 +95,9 @@ export const PublishPage = (): React.JSX.Element => {
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
             <Navbar />
 
-            <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+            <main className="flex-1 max-w-4xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-6 sm:py-12 space-y-6 sm:space-y-8">
                 {/* Top Action Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[var(--border-subtle)]">
+                <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-[var(--border-subtle)]">
                     <Link
                         href="/dashboard/stories"
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors"
@@ -106,11 +106,11 @@ export const PublishPage = (): React.JSX.Element => {
                         <span>Stories Dashboard</span>
                     </Link>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                         <button
                             type="button"
                             onClick={() => setIsPreviewMode((p) => !p)}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface-subtle)] transition-colors"
+                            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface-subtle)] transition-colors cursor-pointer"
                         >
                             {isPreviewMode ? (
                                 <>
@@ -129,7 +129,7 @@ export const PublishPage = (): React.JSX.Element => {
                             type="button"
                             disabled={isCreating}
                             onClick={() => handleSaveStory('draft')}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] transition-colors"
+                            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold border border-[var(--border-subtle)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] transition-colors cursor-pointer"
                         >
                             <FiSave className="w-3.5 h-3.5" />
                             <span>Save Draft</span>
@@ -139,7 +139,7 @@ export const PublishPage = (): React.JSX.Element => {
                             type="button"
                             disabled={isCreating}
                             onClick={() => handleSaveStory('published')}
-                            className="inline-flex items-center gap-2 px-6 py-2 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md shadow-blue-500/25"
+                            className="inline-flex items-center gap-2 px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-bold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transition-all shadow-md shadow-blue-500/25 cursor-pointer"
                         >
                             <FiSend className="w-3.5 h-3.5" />
                             <span>{isCreating ? 'Publishing...' : 'Publish Story'}</span>
@@ -207,7 +207,7 @@ export const PublishPage = (): React.JSX.Element => {
                         />
 
                         {/* Metadata Configuration Box */}
-                        <div className="p-6 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-5">
+                        <div className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-5">
                             <h3 className="text-xs uppercase tracking-widest font-bold text-[var(--text-muted)]">
                                 Story Settings & Classification
                             </h3>

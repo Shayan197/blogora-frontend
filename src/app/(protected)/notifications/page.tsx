@@ -82,7 +82,7 @@ export const NotificationsPage = (): React.JSX.Element => {
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
             <Navbar />
 
-            <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+            <main className="flex-1 max-w-4xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-6 sm:py-12 space-y-6 sm:space-y-8">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[var(--border-subtle)]">
                     <div className="space-y-1">
@@ -116,7 +116,7 @@ export const NotificationsPage = (): React.JSX.Element => {
                 </div>
 
                 {/* Filter Tabs */}
-                <div className="flex flex-wrap items-center gap-2 text-xs font-semibold">
+                <div className="flex items-center gap-2 text-xs font-semibold overflow-x-auto no-scrollbar py-1 -mx-1 px-1">
                     {[
                         { label: 'All Activity', value: 'all' },
                         { label: 'Unread', value: 'unread' },

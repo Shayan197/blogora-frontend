@@ -107,9 +107,9 @@ export const EditStoryPage = (): React.JSX.Element => {
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
             <Navbar />
 
-            <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+            <main className="flex-1 max-w-4xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-6 sm:py-12 space-y-6 sm:space-y-8">
                 {/* Top Action Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[var(--border-subtle)]">
+                <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4 pb-4 border-b border-[var(--border-subtle)]">
                     <Link
                         href="/dashboard/stories"
                         className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--text-primary)]"
@@ -118,11 +118,11 @@ export const EditStoryPage = (): React.JSX.Element => {
                         <span>Stories Dashboard</span>
                     </Link>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                         <button
                             type="button"
                             onClick={() => setIsPreviewMode((p) => !p)}
-                            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-semibold border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface-subtle)]"
+                            className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold border border-[var(--border-subtle)] text-[var(--text-secondary)] hover:bg-[var(--bg-surface-subtle)] cursor-pointer"
                         >
                             {isPreviewMode ? (
                                 <FiEdit2 className="w-3.5 h-3.5" />
@@ -136,7 +136,7 @@ export const EditStoryPage = (): React.JSX.Element => {
                             type="button"
                             disabled={isUpdating}
                             onClick={() => handleUpdateStory(blog?.status)}
-                            className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full text-xs font-semibold bg-[var(--accent-primary)] text-white hover:bg-[var(--accent-primary-hover)] shadow-sm shadow-blue-500/20"
+                            className="inline-flex items-center gap-1.5 px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold bg-[var(--accent-primary)] text-white hover:bg-[var(--accent-primary-hover)] shadow-sm shadow-blue-500/20 cursor-pointer"
                         >
                             <FiSave className="w-3.5 h-3.5" />
                             <span>{isUpdating ? 'Saving...' : 'Save Changes'}</span>
@@ -187,7 +187,7 @@ export const EditStoryPage = (): React.JSX.Element => {
                         />
 
                         {/* Settings */}
-                        <div className="p-6 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-4">
+                        <div className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-sm space-y-4">
                             <div className="space-y-1.5">
                                 <label className="text-xs font-semibold text-[var(--text-secondary)] flex items-center gap-1.5">
                                     <FiFolder className="w-3.5 h-3.5 text-blue-500" />

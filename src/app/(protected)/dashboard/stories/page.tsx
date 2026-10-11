@@ -71,7 +71,7 @@ export const StoriesDashboardPage = (): React.JSX.Element => {
                 onCancel={() => setDeletingBlogUuid(null)}
             />
 
-            <main className="flex-1 max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-8">
+            <main className="flex-1 max-w-6xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-6 sm:py-12 space-y-6 sm:space-y-8">
                 {/* Header Bar */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-[var(--border-subtle)]">
                     <div className="space-y-1">
@@ -137,7 +137,7 @@ export const StoriesDashboardPage = (): React.JSX.Element => {
                             return (
                                 <div
                                     key={b.uuid}
-                                    className="card-editorial p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
+                                    className="card-editorial p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6"
                                 >
                                     <div className="space-y-2 flex-1">
                                         <div className="flex items-center gap-2.5">
@@ -184,7 +184,7 @@ export const StoriesDashboardPage = (): React.JSX.Element => {
                                     </div>
 
                                     {/* Action Buttons */}
-                                    <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                                    <div className="flex items-center gap-2 sm:gap-3 flex-wrap sm:flex-nowrap pt-3 sm:pt-0 border-t sm:border-t-0 border-[var(--border-subtle)] w-full sm:w-auto justify-end">
                                         <Link
                                             href={`/edit/${b.uuid}`}
                                             className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-xl text-xs font-semibold border border-[var(--border-subtle)] bg-[var(--bg-surface-subtle)] text-[var(--text-primary)] hover:border-[var(--accent-primary)] transition-colors"

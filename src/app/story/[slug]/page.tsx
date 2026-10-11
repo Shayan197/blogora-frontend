@@ -106,7 +106,7 @@ export const StoryDetailPage = (): React.JSX.Element => {
 
             <Navbar />
 
-            <main className="flex-1 max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-10">
+            <main className="flex-1 max-w-4xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-6 sm:py-14 space-y-6 sm:space-y-10">
                 {/* Breadcrumbs */}
                 <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
                     <Link href="/" className="hover:text-[var(--text-primary)]">
@@ -142,7 +142,7 @@ export const StoryDetailPage = (): React.JSX.Element => {
                     )}
 
                     {/* Headline */}
-                    <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.14]">
+                    <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--text-primary)] leading-[1.18] sm:leading-[1.14]">
                         {blog.title}
                     </h1>
 

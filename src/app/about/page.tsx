@@ -11,14 +11,14 @@ export const AboutPage = (): React.JSX.Element => {
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
             <Navbar />
 
-            <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-16 sm:space-y-24">
+            <main className="flex-1 max-w-5xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-8 sm:py-20 space-y-12 sm:space-y-24">
                 {/* Hero */}
                 <div className="text-center max-w-3xl mx-auto space-y-6">
                     <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900/50">
                         <FiHeart className="w-3.5 h-3.5 text-blue-500" />
                         <span>Our Vision & Heritage</span>
                     </span>
-                    <h1 className="font-serif text-4xl sm:text-6xl font-extrabold text-[var(--text-primary)] tracking-tight leading-[1.12]">
+                    <h1 className="font-serif text-3xl sm:text-5xl md:text-6xl font-extrabold text-[var(--text-primary)] tracking-tight leading-[1.15] sm:leading-[1.12]">
                         A home for ideas that shape software, systems, and craft.
                     </h1>
                     <p className="text-base sm:text-xl text-[var(--text-secondary)] leading-relaxed">
@@ -71,7 +71,7 @@ export const AboutPage = (): React.JSX.Element => {
                 </div>
 
                 {/* Engineering Highlights */}
-                <div className="rounded-3xl p-8 sm:p-14 bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xl space-y-8">
+                <div className="rounded-3xl p-5 sm:p-14 bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xl space-y-8">
                     <div className="max-w-2xl space-y-3">
                         <span className="text-xs uppercase tracking-widest font-bold text-[var(--accent-primary)]">
                             Platform Blueprint

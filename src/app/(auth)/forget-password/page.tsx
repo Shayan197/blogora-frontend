@@ -58,8 +58,8 @@ const ForgetPassword = (): React.JSX.Element => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--background)] px-4 py-12 relative">
-            <div className="absolute top-6 right-6">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-[var(--background)] px-3 sm:px-4 py-8 sm:py-12 relative">
+            <div className="absolute top-4 sm:top-6 right-4 sm:right-6">
                 <ThemeToggle />
             </div>
 
@@ -77,7 +77,7 @@ const ForgetPassword = (): React.JSX.Element => {
 
                 <form
                     onSubmit={handleSubmit(submit)}
-                    className="p-8 sm:p-10 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xl flex flex-col"
+                    className="p-5 sm:p-8 md:p-10 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] shadow-xl flex flex-col"
                 >
                     <H1 name="Forgot Password" />
                     <p className="text-xs text-center text-[var(--text-secondary)] mb-6">

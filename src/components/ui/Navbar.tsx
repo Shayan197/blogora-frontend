@@ -84,21 +84,21 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                     : 'bg-transparent border-b border-transparent'
             }`}
         >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-18">
+            <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16 sm:h-18">
                     {/* Brand Logo */}
                     <div className="flex items-center gap-8">
-                        <Link href="/" className="flex items-center gap-2.5 group">
-                            <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200">
-                                <span className="font-serif font-bold italic text-2xl tracking-tighter">
+                        <Link href="/" className="flex items-center gap-2 sm:gap-2.5 group">
+                            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-linear-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform duration-200">
+                                <span className="font-serif font-bold italic text-xl sm:text-2xl tracking-tighter">
                                     B
                                 </span>
                             </div>
                             <div className="flex flex-col">
-                                <span className="font-serif text-2xl font-bold tracking-tight text-text-primary group-hover:text-blue-600 transition-colors">
+                                <span className="font-serif text-xl sm:text-2xl font-bold tracking-tight text-text-primary group-hover:text-blue-600 transition-colors">
                                     Blogora
                                 </span>
-                                <span className="text-[10px] uppercase font-semibold tracking-widest text-text-muted -mt-1">
+                                <span className="text-[9px] sm:text-[10px] uppercase font-semibold tracking-widest text-text-muted -mt-1">
                                     Editorial
                                 </span>
                             </div>
@@ -126,7 +126,7 @@ export const Navbar = ({ onOpenSearch }: NavbarProps): React.JSX.Element => {
                     </div>
 
                     {/* Right Side Actions */}
-                    <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+                    <div className="flex items-center gap-1.5 sm:gap-3 md:gap-4">
                         {/* Search Trigger — icon only on mobile, full pill on sm+ */}
                         <button
                             type="button"

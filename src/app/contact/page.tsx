@@ -55,7 +55,7 @@ export const ContactPage = (): React.JSX.Element => {
         <div className="min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]">
             <Navbar />
 
-            <main className="flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 sm:py-20 space-y-16">
+            <main className="flex-1 max-w-5xl mx-auto w-full px-3.5 sm:px-6 lg:px-8 py-8 sm:py-20 space-y-12 sm:space-y-16">
                 {/* Header */}
                 <div className="text-center max-w-2xl mx-auto space-y-4">
                     <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-50 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-900/50">
@@ -74,7 +74,7 @@ export const ContactPage = (): React.JSX.Element => {
                 {/* Form & Info Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
                     {/* Contact Form */}
-                    <div className="lg:col-span-7 card-editorial p-6 sm:p-10 space-y-6">
+                    <div className="lg:col-span-7 card-editorial p-5 sm:p-10 space-y-6">
                         <h2 className="font-serif text-xl font-bold text-[var(--text-primary)]">
                             Send us a message
                         </h2>

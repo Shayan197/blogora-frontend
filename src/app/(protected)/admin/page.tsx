@@ -568,7 +568,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                 <aside
                     onMouseEnter={() => setIsSidebarHovered(true)}
                     onMouseLeave={() => setIsSidebarHovered(false)}
-                    className={`fixed top-16 bottom-0 left-0 z-40 bg-[var(--bg-surface)]/95 backdrop-blur-xl border-r border-[var(--border-subtle)] transition-all duration-300 flex flex-col justify-between shadow-2xl ${
+                    className={`hidden md:flex fixed top-16 bottom-0 left-0 z-40 bg-[var(--bg-surface)]/95 backdrop-blur-xl border-r border-[var(--border-subtle)] transition-all duration-300 flex-col justify-between shadow-2xl ${
                         isSidebarExpanded ? 'w-64' : 'w-18'
                     }`}
                 >
@@ -706,10 +706,67 @@ export const AdminConsolePage = (): React.JSX.Element => {
                 {/* 📄 Main Content Canvas                                         */}
                 {/* ============================================================== */}
                 <main
-                    className={`flex-1 transition-all duration-300 w-full px-4 sm:px-8 py-8 space-y-8 ${
-                        isSidebarPinned ? 'ml-64' : 'ml-18'
+                    className={`flex-1 transition-all duration-300 w-full px-3.5 sm:px-6 md:px-8 py-5 sm:py-8 space-y-6 sm:space-y-8 ml-0 ${
+                        isSidebarPinned ? 'md:ml-64' : 'md:ml-18'
                     }`}
                 >
+                    {/* Mobile Responsive Governance Navigation Bar (< md) */}
+                    <div className="flex md:hidden overflow-x-auto no-scrollbar py-1 gap-2 border-b border-[var(--border-subtle)] pb-3 -mx-1 px-1">
+                        {[
+                            {
+                                id: 'dashboard' as NavSection,
+                                label: 'Dashboard',
+                                icon: FiBarChart2,
+                                badge: '12 Charts',
+                            },
+                            {
+                                id: 'verification' as NavSection,
+                                label: 'Verification Hub',
+                                icon: FiCheckCircle,
+                                badge: `${unverifiedUsersList.length}`,
+                            },
+                            {
+                                id: 'users' as NavSection,
+                                label: 'Users Directory',
+                                icon: FiUsers,
+                                badge: `${totalUsersCount}`,
+                            },
+                            {
+                                id: 'settings' as NavSection,
+                                label: 'Universal Settings',
+                                icon: FiSettings,
+                            },
+                        ].map((item) => {
+                            const IconComp = item.icon;
+                            const isActive = activeSection === item.id;
+                            return (
+                                <button
+                                    key={item.id}
+                                    type="button"
+                                    onClick={() => setActiveSection(item.id)}
+                                    className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
+                                        isActive
+                                            ? 'bg-[var(--accent-primary)] text-white shadow-md shadow-[var(--accent-primary)]/20 font-bold'
+                                            : 'bg-[var(--bg-surface)] text-[var(--text-secondary)] border border-[var(--border-subtle)] hover:bg-[var(--bg-surface-subtle)]'
+                                    }`}
+                                >
+                                    <IconComp className="w-3.5 h-3.5 shrink-0" />
+                                    <span>{item.label}</span>
+                                    {item.badge && (
+                                        <span
+                                            className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold ${
+                                                isActive
+                                                    ? 'bg-white/20 text-white'
+                                                    : 'bg-[var(--bg-surface-subtle)] text-[var(--text-muted)] border border-[var(--border-subtle)]'
+                                            }`}
+                                        >
+                                            {item.badge}
+                                        </span>
+                                    )}
+                                </button>
+                            );
+                        })}
+                    </div>
                     {/* Top Canvas Header Bar */}
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[var(--border-subtle)]">
                         <div>
@@ -825,7 +882,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                             </div>
 
                             {/* 12 Visual Charts Grid */}
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                                 {/* CHART 1: User Growth Velocity Area Chart */}
                                 <div className="p-5 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-4">
                                     <div className="flex items-center justify-between">
@@ -837,7 +894,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                                             +28.4%
                                         </span>
                                     </div>
-                                    <div className="h-44 w-full flex items-end justify-between gap-2 pt-6 px-1">
+                                    <div className="h-44 w-full flex items-end justify-between gap-1 sm:gap-2 pt-6 px-1">
                                         {[35, 45, 40, 60, 55, 75, 90, 85, 110, 125, 140, 160].map(
                                             (val, idx) => (
                                                 <div
@@ -1099,7 +1156,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                                         <FiLayers className="text-emerald-500" />
                                         7. Monthly Publishing Rate
                                     </h3>
-                                    <div className="h-40 flex items-end justify-between gap-3 pt-4 px-2">
+                                    <div className="h-40 flex items-end justify-between gap-1.5 sm:gap-3 pt-4 px-1 sm:px-2">
                                         {[
                                             { m: 'May', v: 14 },
                                             { m: 'Jun', v: 22 },
@@ -1277,7 +1334,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                                         <FiActivity className="text-emerald-500" />
                                         12. 30-Day Retention Curve
                                     </h3>
-                                    <div className="h-40 flex items-end justify-between gap-2 pt-2 px-1">
+                                    <div className="h-40 flex items-end justify-between gap-1 sm:gap-2 pt-2 px-1">
                                         {[100, 78, 64, 52, 48, 44, 41, 39].map((ret, idx) => (
                                             <div
                                                 key={idx}
@@ -1303,7 +1360,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                     {/* ========================================================== */}
                     {activeSection === 'verification' && (
                         <div className="space-y-6 animate-in fade-in duration-300">
-                            <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-4">
+                            <div className="p-4 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-4">
                                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[var(--border-subtle)]">
                                     <div>
                                         <h2 className="font-serif text-lg font-bold text-[var(--text-primary)]">
@@ -1335,7 +1392,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                                         </p>
                                     </div>
                                 ) : (
-                                    <div className="overflow-x-auto">
+                                    <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
                                         <table className="w-full text-left text-xs">
                                             <thead>
                                                 <tr className="border-b border-[var(--border-subtle)] text-[var(--text-muted)] font-semibold">
@@ -1406,7 +1463,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                     {activeSection === 'users' && (
                         <div className="space-y-6 animate-in fade-in duration-300">
                             {/* Table Container Card */}
-                            <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-6">
+                            <div className="p-4 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-6">
                                 {/* Top-Right Filters & Search Header */}
                                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-[var(--border-subtle)]">
                                     <div>
@@ -1512,7 +1569,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                                         No users matching selected filters.
                                     </div>
                                 ) : (
-                                    <div className="overflow-x-auto">
+                                    <div className="overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
                                         <table className="w-full text-left text-xs">
                                             <thead>
                                                 <tr className="border-b border-[var(--border-subtle)] text-[var(--text-muted)] font-semibold">
@@ -1698,7 +1755,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                         <div className="space-y-6 animate-in fade-in duration-300">
                             {/* General & Security Configuration */}
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-4">
+                                <div className="p-4 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-4">
                                     <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
                                         <FiGlobe className="text-[var(--accent-primary)]" />
                                         Platform General Parameters
@@ -1748,7 +1805,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                                     </div>
                                 </div>
 
-                                <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-4">
+                                <div className="p-4 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-4">
                                     <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
                                         <FiShield className="text-emerald-500" />
                                         Security & Gateway Policies
@@ -1792,7 +1849,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
                             </div>
 
                             {/* Taxonomy Management (Categories & Tags) */}
-                            <div className="p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-6">
+                            <div className="p-4 sm:p-6 rounded-2xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-6">
                                 <div className="flex items-center justify-between pb-3 border-b border-[var(--border-subtle)]">
                                     <div>
                                         <h3 className="font-serif text-base font-bold text-[var(--text-primary)] flex items-center gap-2">
@@ -1938,7 +1995,7 @@ export const AdminConsolePage = (): React.JSX.Element => {
             {/* ============================================================== */}
             {/* 📍 GLOBAL FLOATING ACTION BUTTON (Right-Bottom Corner Strict)   */}
             {/* ============================================================== */}
-            <div className="fixed right-6 bottom-6 z-40 flex flex-col items-end gap-2.5">
+            <div className="fixed right-4 bottom-4 sm:right-6 sm:bottom-6 z-40 flex flex-col items-end gap-2 sm:gap-2.5">
                 {isFabOpen && (
                     <div className="p-3 bg-[var(--bg-surface)] border border-[var(--border-subtle)] rounded-2xl shadow-2xl space-y-2 text-xs animate-in fade-in zoom-in-95 duration-150 backdrop-blur-xl">
                         <button
@@ -1983,10 +2040,10 @@ export const AdminConsolePage = (): React.JSX.Element => {
                     type="button"
                     onClick={() => setIsFabOpen((prev) => !prev)}
                     title="Governance Actions"
-                    className="w-14 h-14 rounded-full bg-[var(--accent-primary)] text-white flex items-center justify-center shadow-xl shadow-[var(--accent-primary)]/35 hover:scale-105 active:scale-95 transition-all cursor-pointer ring-4 ring-white/10"
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[var(--accent-primary)] text-white flex items-center justify-center shadow-xl shadow-[var(--accent-primary)]/35 hover:scale-105 active:scale-95 transition-all cursor-pointer ring-4 ring-white/10"
                     aria-label="Admin Actions Menu"
                 >
-                    <FiSliders className="w-6 h-6" />
+                    <FiSliders className="w-5 h-5 sm:w-6 sm:h-6" />
                 </button>
             </div>
 
